@@ -8,7 +8,7 @@ const benefits = [
   { icon: Brain, key: 'aiNative' },
   { icon: Zap, key: 'resources' },
   { icon: Users, key: 'mentors' },
-  { icon: Bot, key: 'openclaw' },
+  { icon: Bot, key: 'aiCognition' },
   { icon: Sparkles, key: 'aiForScience' },
   { icon: Rocket, key: 'growth' },
 ];
