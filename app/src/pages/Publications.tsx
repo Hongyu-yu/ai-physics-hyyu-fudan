@@ -7,6 +7,15 @@ import type { Publication } from '@/data/scholarData';
 const scholarData = scholarStats;
 
 // Classify: first/co-first author vs other
+// These second-author papers are NOT co-first
+const notCoFirst = new Set([
+  'transferable machine learning approach for predicting electronic structures of charged defects',
+  'defect-charge-driven 90 {\\deg} switching in hfo2',
+  'universal machine learning kohn–sham hamiltonian for materials',
+  'first-principles approaches to magnetoelectric multiferroics',
+  'transferable equivariant graph neural networks for the hamiltonians of molecules and solids',
+]);
+
 function classifyPublications(pubs: Publication[]) {
   const firstOrCoFirst: Publication[] = [];
   const other: Publication[] = [];
@@ -16,7 +25,8 @@ function classifyPublications(pubs: Publication[]) {
     const authorList = authors.split(' and ').map(a => a.trim());
     const matchYu = (s: string) => s.includes('yu') && (s.includes('hong') || s.includes('h '));
     const isFirst = authorList.length > 0 && matchYu(authorList[0]);
-    const isCoFirst = !isFirst && authorList.length > 1 && matchYu(authorList[1]);
+    const isCoFirst = !isFirst && authorList.length > 1 && matchYu(authorList[1])
+      && !notCoFirst.has(pub.title.toLowerCase());
 
     if (isFirst || isCoFirst) {
       firstOrCoFirst.push(pub);
