@@ -4,7 +4,7 @@ import { Brain, Atom, Zap, Layers, Cpu, Sparkles, ExternalLink, Bot } from 'luci
 import { Button } from '@/components/ui/button';
 
 const researchAreas = [
-  { icon: Bot, key: 'aiPhysicist', span: 'col-span-12 lg:col-span-8' },
+  { icon: Bot, key: 'aiPhysicist', span: 'col-span-12 lg:col-span-4' },
   { icon: Brain, key: 'ml', span: 'col-span-12 lg:col-span-4' },
   { icon: Atom, key: 'ferroelectric', span: 'col-span-12 lg:col-span-4' },
   { icon: Zap, key: 'multiferroic', span: 'col-span-12 lg:col-span-4' },
@@ -107,7 +107,7 @@ export default function Research() {
                 
                 <div className="pt-8 border-t border-black/[0.05] dark:border-white/[0.05] space-y-4">
                   <p className="text-[13px] font-bold uppercase tracking-wider text-[#1d1d1f] dark:text-white">{t('research.keyAchievements')}</p>
-                  <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <ul className="grid grid-cols-1 gap-3">
                     {achievements[area.key].map((item, i) => (
                       <li key={i} className="flex items-center gap-2 text-[14px] text-[#86868b]">
                         <div className="w-1 h-1 rounded-full bg-[#0071e3]" />
