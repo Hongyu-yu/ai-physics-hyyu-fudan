@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BookOpen, Award, Users, Code2, Microscope, Lightbulb, GraduationCap } from 'lucide-react';
+import { scholarStats } from '@/data/scholarData';
 
 const researchInterests = [
   { icon: Microscope, key: 'mlPotentials' },
@@ -14,9 +15,9 @@ const education = [
 ];
 
 const highlights = [
-  { icon: BookOpen, value: '21', labelKey: 'publications' },
-  { icon: Award, value: '13', labelKey: 'firstAuthor' },
-  { icon: Users, value: '541', labelKey: 'citations' },
+  { icon: BookOpen, value: scholarStats.publications, labelKey: 'publications' },
+  { icon: Award, value: scholarStats.firstAuthor, labelKey: 'firstAuthor' },
+  { icon: Users, value: scholarStats.citations, labelKey: 'citations' },
 ];
 
 const achievements = ['prl', 'am', 'spingnn', 'pasp'];
@@ -112,7 +113,7 @@ export default function About() {
             </div>
 
             <div className="reveal opacity-0 stagger-2 space-y-12">
-              <h2 className="text-[32px] font-semibold tracking-tight">Key Achievements</h2>
+              <h2 className="text-[32px] font-semibold tracking-tight">{t('about.highlights')}</h2>
               <div className="apple-card-flat p-10 space-y-8">
                 {achievements.map((key, i) => (
                   <div key={i} className="flex gap-4">
