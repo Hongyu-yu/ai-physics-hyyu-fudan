@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ExternalLink, Quote } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
 import { scholarStats, publications as scholarPublications } from '@/data/scholarData';
 import type { Publication } from '@/data/scholarData';
 
@@ -46,11 +45,6 @@ function PubCard({ pub, index, t }: { pub: Publication; index: number; t: (k: st
       style={{ animationDelay: `${index * 0.05}s` }}
     >
       <div className="flex flex-wrap items-center gap-3 mb-6">
-        {pub.highlight && (
-          <Badge className="bg-[#0071e3] text-white hover:bg-[#0071e3] rounded-full px-4 text-[11px] uppercase tracking-wider font-bold">
-            {t('publications.highlight')}
-          </Badge>
-        )}
         <span className="text-[14px] font-bold text-[#86868b]">{pub.year}</span>
         <div className="flex items-center gap-1 text-[13px] text-[#86868b]">
           <Quote className="w-3.5 h-3.5" /> {pub.citations} {t('publications.citations')}
