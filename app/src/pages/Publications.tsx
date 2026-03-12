@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ExternalLink, Quote } from 'lucide-react';
-import { scholarStats, firstOrCoFirst, otherPubs } from '@/data/scholarData';
+import { scholarStats, firstOrCoFirst, otherPubs, formatAuthors } from '@/data/scholarData';
 import type { Publication } from '@/data/scholarData';
 
 const scholarData = scholarStats;
@@ -25,7 +25,7 @@ function PubCard({ pub, index, t }: { pub: Publication; index: number; t: (k: st
         {pub.title}
       </h3>
 
-      <p className="text-[16px] text-[#86868b] mb-6 leading-relaxed line-clamp-2">{pub.authors}</p>
+      <p className="text-[16px] text-[#86868b] mb-6 leading-relaxed line-clamp-2">{formatAuthors(pub)}</p>
 
       <div className="flex items-center justify-between pt-6 border-t border-black/[0.05] dark:border-white/[0.05]">
         <span className="text-[15px] font-bold text-[#1d1d1f] dark:text-[#f5f5f7]">{pub.journal}</span>

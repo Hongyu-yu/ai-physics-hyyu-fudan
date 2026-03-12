@@ -27,7 +27,6 @@ export const publications: Publication[] = rawData.publications as Publication[]
 export const lastUpdated: string = rawData.lastUpdated;
 
 // Papers where Yu is second author but NOT co-first
-// Unique substrings to identify second-author papers that are NOT co-first
 const notCoFirstKeywords = [
   'electronic structures of charged defects',
   'switching in hfo',
@@ -47,6 +46,7 @@ function matchYu(s: string) {
 
 function classify(pubs: Publication[]) {
   const firstOrCoFirst: Publication[] = [];
+  const coFirstTitles = new Set<string>();
   const other: Publication[] = [];
 
   for (const pub of pubs) {
@@ -57,6 +57,7 @@ function classify(pubs: Publication[]) {
 
     if (isFirst || isCoFirst) {
       firstOrCoFirst.push(pub);
+      if (isCoFirst) coFirstTitles.add(pub.title);
     } else {
       other.push(pub);
     }
@@ -67,10 +68,23 @@ function classify(pubs: Publication[]) {
   firstOrCoFirst.sort(sortFn);
   other.sort(sortFn);
 
-  return { firstOrCoFirst, other };
+  return { firstOrCoFirst, other, coFirstTitles };
 }
 
-export const { firstOrCoFirst, other: otherPubs } = classify(publications);
+export const { firstOrCoFirst, other: otherPubs, coFirstTitles } = classify(publications);
+
+// Format authors: "A and B and C" → "A, B, C"
+// For co-first papers, add "#" to first two authors
+export function formatAuthors(pub: Publication): string {
+  const parts = pub.authors.split(' and ').map(a => a.trim());
+  if (coFirstTitles.has(pub.title)) {
+    if (parts.length >= 2) {
+      parts[0] = parts[0] + '#';
+      parts[1] = parts[1] + '#';
+    }
+  }
+  return parts.join(', ');
+}
 
 // Override the static firstAuthor count with the accurate computed count
 scholarStats.firstAuthor = firstOrCoFirst.length;
