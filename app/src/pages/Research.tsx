@@ -4,11 +4,11 @@ import { Brain, Atom, Zap, Layers, Cpu, Sparkles, ExternalLink, Bot } from 'luci
 import { Button } from '@/components/ui/button';
 
 const researchAreas = [
-  { icon: Bot, key: 'aiPhysicist', span: 'col-span-12 lg:col-span-4' },
-  { icon: Brain, key: 'ml', span: 'col-span-12 lg:col-span-4' },
-  { icon: Atom, key: 'ferroelectric', span: 'col-span-12 lg:col-span-4' },
-  { icon: Zap, key: 'multiferroic', span: 'col-span-12 lg:col-span-4' },
-  { icon: Layers, key: 'computational', span: 'col-span-12 lg:col-span-4' },
+  { icon: Bot, key: 'aiPhysicist' },
+  { icon: Brain, key: 'ml' },
+  { icon: Atom, key: 'ferroelectric' },
+  { icon: Zap, key: 'multiferroic' },
+  { icon: Layers, key: 'computational' },
 ];
 
 const achievements: Record<string, string[]> = {
@@ -69,89 +69,122 @@ export default function Research() {
 
   return (
     <div ref={sectionRef} className="bg-white dark:bg-black">
-      {/* ── Title Section ── */}
-      <section className="pt-40 pb-24">
-        <div className="max-w-[1200px] mx-auto px-6">
+      {/* ── Hero ── */}
+      <section className="pt-40 pb-32">
+        <div className="max-w-[980px] mx-auto px-6 text-center">
           <div className="reveal opacity-0 space-y-6">
             <h1 className="text-hero text-[#1d1d1f] dark:text-white">
-              {t('research.title')} <br />
+              {t('research.title')}{' '}
               <span className="text-[#0071e3]">{t('research.highlight')}</span>
             </h1>
-            <p className="text-[28px] text-[#86868b] dark:text-[#a1a1a6] font-medium">
+            <p className="text-[24px] text-[#86868b] dark:text-[#a1a1a6] leading-relaxed max-w-2xl mx-auto">
               {t('research.subtitle')}
             </p>
           </div>
         </div>
       </section>
 
-      {/* ── Research Bento Grid ── */}
-      <section className="py-20 bg-[#f5f5f7] dark:bg-[#111111]">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="bento-grid">
-            {researchAreas.map((area, idx) => (
-              <div
-                key={idx}
-                className={`reveal opacity-0 apple-card p-10 flex flex-col justify-between group ${area.span}`}
-                style={{ animationDelay: `${idx * 0.1}s` }}
-              >
-                <div>
-                  <div className="w-14 h-14 rounded-2xl bg-[#0071e3] flex items-center justify-center mb-8 shadow-lg group-hover:scale-110 transition-transform">
-                    <area.icon className="w-8 h-8 text-white" />
+      {/* ── Flagship: AI Physicist ── */}
+      <section className="py-32 bg-black text-white">
+        <div className="max-w-[980px] mx-auto px-6">
+          <div className="reveal opacity-0 text-center space-y-8">
+            <div className="w-20 h-20 rounded-full bg-white/10 mx-auto flex items-center justify-center">
+              <Bot className="w-10 h-10 text-[#2997ff]" />
+            </div>
+            <p className="text-[14px] font-bold text-[#2997ff] uppercase tracking-widest">
+              {t('research.areas.aiPhysicist.subtitle')}
+            </p>
+            <h2 className="text-[48px] lg:text-[56px] font-semibold tracking-tight leading-tight">
+              {t('research.areas.aiPhysicist.title')}
+            </h2>
+            <p className="text-[21px] text-[#a1a1a6] leading-relaxed max-w-2xl mx-auto">
+              {t('research.areas.aiPhysicist.desc')}
+            </p>
+            <div className="flex flex-wrap justify-center gap-6 pt-8">
+              {achievements.aiPhysicist.map((item, i) => (
+                <span key={i} className="text-[15px] text-[#a1a1a6] flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#2997ff]" />
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Research Areas (flowing sections) ── */}
+      {researchAreas.slice(1).map((area, idx) => {
+        const isGray = idx % 2 === 0;
+        return (
+          <section
+            key={area.key}
+            className={isGray ? 'py-28 bg-[#f5f5f7] dark:bg-[#111111]' : 'py-28 bg-white dark:bg-black'}
+          >
+            <div className="max-w-[980px] mx-auto px-6">
+              <div className={`reveal opacity-0 flex flex-col lg:flex-row items-start gap-16 ${idx % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+                {/* Icon side */}
+                <div className="flex-shrink-0 lg:pt-2">
+                  <div className="w-16 h-16 rounded-2xl bg-[#0071e3]/10 dark:bg-[#0071e3]/20 flex items-center justify-center">
+                    <area.icon className="w-8 h-8 text-[#0071e3]" />
                   </div>
-                  <h3 className="text-[28px] font-semibold mb-2">{t(`research.areas.${area.key}.title`)}</h3>
-                  <p className="text-[14px] font-bold text-[#0071e3] uppercase tracking-widest mb-4">
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 space-y-4">
+                  <p className="text-[13px] font-bold text-[#0071e3] uppercase tracking-widest">
                     {t(`research.areas.${area.key}.subtitle`)}
                   </p>
-                  <p className="text-[17px] text-[#86868b] leading-relaxed mb-8">{t(`research.areas.${area.key}.desc`)}</p>
-                </div>
-                
-                <div className="pt-8 border-t border-black/[0.05] dark:border-white/[0.05] space-y-4">
-                  <p className="text-[13px] font-bold uppercase tracking-wider text-[#1d1d1f] dark:text-white">{t('research.keyAchievements')}</p>
-                  <ul className="grid grid-cols-1 gap-3">
+                  <h3 className="text-[32px] font-semibold tracking-tight text-[#1d1d1f] dark:text-white">
+                    {t(`research.areas.${area.key}.title`)}
+                  </h3>
+                  <p className="text-[19px] text-[#86868b] leading-relaxed">
+                    {t(`research.areas.${area.key}.desc`)}
+                  </p>
+                  <div className="pt-4 space-y-3">
                     {achievements[area.key].map((item, i) => (
-                      <li key={i} className="flex items-center gap-2 text-[14px] text-[#86868b]">
-                        <div className="w-1 h-1 rounded-full bg-[#0071e3]" />
+                      <div key={i} className="flex items-center gap-3 text-[15px] text-[#1d1d1f] dark:text-[#d2d2d7]">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#0071e3] flex-shrink-0" />
                         {item}
-                      </li>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            </div>
+          </section>
+        );
+      })}
 
-      {/* ── Software Showcase ── */}
-      <section className="py-32">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="reveal opacity-0 text-center mb-20 space-y-4">
+      {/* ── Software ── */}
+      <section className="py-32 bg-[#f5f5f7] dark:bg-[#111111]">
+        <div className="max-w-[980px] mx-auto px-6">
+          <div className="reveal opacity-0 text-center mb-20">
             <h2 className="text-headline">{t('research.software')}</h2>
-            <div className="w-20 h-1 bg-[#0071e3] mx-auto rounded-full" />
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="space-y-6">
             {softwareProjects.map((project, idx) => (
-              <div key={idx} className="reveal opacity-0 stagger-1 group p-12 rounded-[2rem] bg-black text-white relative overflow-hidden transition-all hover:-translate-y-2">
-                <div className="absolute -bottom-10 -right-10 opacity-10 group-hover:scale-150 transition-transform duration-1000">
-                  <project.icon className="w-64 h-64" />
+              <div key={idx} className="reveal opacity-0 group flex items-center gap-8 p-8 rounded-2xl bg-white dark:bg-[#1c1c1e] transition-colors hover:bg-[#0071e3]/[0.03] dark:hover:bg-white/[0.04]">
+                <div className="w-14 h-14 rounded-2xl bg-black dark:bg-white/10 flex items-center justify-center flex-shrink-0">
+                  <project.icon className="w-7 h-7 text-[#2997ff]" />
                 </div>
-                <project.icon className="w-10 h-10 text-[#2997ff] mb-8" />
-                <h3 className="text-[32px] font-semibold mb-4">{project.name}</h3>
-                <p className="text-[#a1a1a6] text-[18px] leading-relaxed relative z-10">{project.desc}</p>
+                <div>
+                  <h3 className="text-[21px] font-semibold text-[#1d1d1f] dark:text-white">{project.name}</h3>
+                  <p className="text-[16px] text-[#86868b] mt-1">{project.desc}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ── CTA Banner ── */}
+      {/* ── Platform CTA ── */}
       <section className="py-40 bg-white dark:bg-black">
-        <div className="max-w-[1000px] mx-auto px-6">
-          <div className="reveal opacity-0 apple-card bg-[#f5f5f7] dark:bg-[#1c1c1e] p-16 lg:p-24 text-center space-y-8">
-            <Sparkles className="w-16 h-16 text-[#0071e3] mx-auto" />
-            <h2 className="text-[40px] font-semibold tracking-tight">{t('research.platform')}</h2>
-            <p className="text-[21px] text-[#86868b] max-w-2xl mx-auto leading-relaxed">{t('research.platformDesc')}</p>
+        <div className="max-w-[680px] mx-auto px-6 text-center space-y-8">
+          <Sparkles className="reveal opacity-0 w-12 h-12 text-[#0071e3] mx-auto" />
+          <h2 className="reveal opacity-0 stagger-1 text-[40px] font-semibold tracking-tight">{t('research.platform')}</h2>
+          <p className="reveal opacity-0 stagger-2 text-[19px] text-[#86868b] leading-relaxed">{t('research.platformDesc')}</p>
+          <div className="reveal opacity-0 stagger-3">
             <Button asChild className="apple-button bg-[#0071e3] hover:bg-[#0077ed] text-white">
               <a href="https://sci-ai.cn" target="_blank" rel="noopener noreferrer">
                 {t('research.visitPlatform')}
@@ -164,4 +197,3 @@ export default function Research() {
     </div>
   );
 }
-

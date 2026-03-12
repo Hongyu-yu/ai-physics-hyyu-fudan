@@ -45,8 +45,8 @@ const { firstAuthor, coFirstAuthor, other } = classifyPublications(scholarPublic
 function PubCard({ pub, index, t }: { pub: Publication; index: number; t: (k: string) => string }) {
   return (
     <div
-      className={`reveal opacity-0 apple-card-flat p-10 group transition-all duration-500 hover:bg-white dark:hover:bg-[#1c1c1e] hover:shadow-xl ${
-        pub.highlight ? 'ring-1 ring-[#0071e3]/20' : ''
+      className={`reveal opacity-0 p-8 lg:p-10 group transition-all duration-500 rounded-2xl ${
+        pub.highlight ? 'bg-[#f5f5f7] dark:bg-[#1c1c1e]' : 'hover:bg-[#f5f5f7] dark:hover:bg-[#1c1c1e]'
       }`}
       style={{ animationDelay: `${index * 0.05}s` }}
     >
