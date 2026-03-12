@@ -1,0 +1,135 @@
+name: Update Google Scholar Data
+
+on:
+  schedule:
+    # Run every Sunday at 00:00 UTC
+    - cron: '0 0 * * 0'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  update-scholar-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        pip install scholarly
+        
+    - name: Fetch Google Scholar data
+      run: |
+        cat > fetch_scholar.py << 'EOF'
+        import json
+        from scholarly import scholarly
+        
+        # Search for the author
+        search_query = scholarly.search_author('Hongyu Yu Fudan University')
+        author = next(search_query)
+        
+        # Fill in the author details
+        author = scholarly.fill(author)
+        
+        # Extract relevant data
+        data = {
+            'citations': author.get('citedby', 0),
+            'hIndex': author.get('hindex', 0),
+            'i10Index': author.get('i10index', 0),
+            'publications': len(author.get('publications', [])),
+        }
+        
+        # Save to JSON file
+        with open('scholar-data.json', 'w') as f:
+            json.dump(data, f, indent=2)
+            
+        print(f"Updated scholar data: {data}")
+        EOF
+        
+        python fetch_scholar.py
+        
+    - name: Update source files
+      run: |
+        cat > update_source.py << 'EOF'
+        import json
+        import re
+        
+        # Read scholar data
+        with open('scholar-data.json', 'r') as f:
+            data = json.load(f)
+        
+        # Update Home.tsx
+        with open('src/pages/Home.tsx', 'r') as f:
+            content = f.read()
+        
+        # Update scholar data object
+        content = re.sub(
+            r"const scholarData = \{[^}]+\};",
+            f"""const scholarData = {{
+  citations: {data['citations']},
+  hIndex: {data['hIndex']},
+  i10Index: {data['i10Index']},
+  publications: {data['publications']},
+}};""",
+            content
+        )
+        
+        with open('src/pages/Home.tsx', 'w') as f:
+            f.write(content)
+        
+        # Update Publications.tsx
+        with open('src/pages/Publications.tsx', 'r') as f:
+            content = f.read()
+        
+        content = re.sub(
+            r"const scholarData = \{[^}]+\};",
+            f"""const scholarData = {{
+  citations: {data['citations']},
+  hIndex: {data['hIndex']},
+  i10Index: {data['i10Index']},
+  publications: {data['publications']},
+  firstAuthor: 13,
+  topJournals: 3,
+}};""",
+            content
+        )
+        
+        with open('src/pages/Publications.tsx', 'w') as f:
+            f.write(content)
+        
+        # Update Contact.tsx
+        with open('src/pages/Contact.tsx', 'r') as f:
+            content = f.read()
+        
+        content = re.sub(
+            r"const scholarData = \{[^}]+\};",
+            f"""const scholarData = {{
+  citations: {data['citations']},
+  hIndex: {data['hIndex']},
+  i10Index: {data['i10Index']},
+  publications: {data['publications']},
+  topJournals: 3,
+}};""",
+            content
+        )
+        
+        with open('src/pages/Contact.tsx', 'w') as f:
+            f.write(content)
+        
+        print("Updated source files with new scholar data")
+        EOF
+        
+        python update_source.py
+        
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add src/pages/Home.tsx src/pages/Publications.tsx src/pages/Contact.tsx
+        git diff --staged --quiet || git commit -m "Update Google Scholar data [automated]"
+        git push

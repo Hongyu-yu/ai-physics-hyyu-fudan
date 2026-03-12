@@ -1,0 +1,205 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "publications": "Publications",
+    "research": "Research",
+    "recruitment": "Join Us",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Hongyu",
+    "subtitle": "Assistant Professor",
+    "department": "Department of Physics",
+    "university": "Fudan University",
+    "location": "Shanghai, China",
+    "field": "Condensed Matter Physics",
+    "description": "Specializing in computational physics and machine learning methods for ferroic materials research.",
+    "contactBtn": "Contact Me",
+    "githubBtn": "GitHub",
+    "stats": {
+      "citations": "Citations",
+      "hIndex": "h-index",
+      "i10Index": "i10-index",
+      "publications": "Publications"
+    }
+  },
+  "about": {
+    "title": "About",
+    "highlight": "Me",
+    "subtitle": "Computational physicist passionate about leveraging machine learning to understand and design novel functional materials",
+    "researchInterests": "Research Interests",
+    "interests": {
+      "mlPotentials": {
+        "title": "Machine Learning Potentials",
+        "desc": "Developing neural network-based interatomic potentials for magnetic and ferroelectric materials"
+      },
+      "ferroic": {
+        "title": "Ferroic Materials",
+        "desc": "Computational study of ferroelectric and multiferroic materials for next-generation devices"
+      },
+      "aiScience": {
+        "title": "AI for Science",
+        "desc": "Applying deep learning methods to accelerate materials discovery and simulation"
+      }
+    },
+    "education": "Education",
+    "degrees": {
+      "phd": {
+        "degree": "Ph.D. in Condensed Matter Physics",
+        "thesis": "Dissertation: Machine Learning Methods for Ferroic Materials"
+      },
+      "bs": {
+        "degree": "B.S. in Physics (Boling Class)",
+        "thesis": "Honors program in physics with focus on theoretical physics"
+      }
+    },
+    "highlights": "Research Highlights",
+    "achievements": {
+      "prl": "Published 2 papers in Physical Review Letters (2025)",
+      "am": "Published 1 paper in Advanced Materials (2025)",
+      "spingnn": "Developed SpinGNN++ - A comprehensive magnetic machine learning potential",
+      "pasp": "Contributed to PASP software package development"
+    }
+  },
+  "publications": {
+    "title": "Selected",
+    "highlight": "Publications",
+    "subtitle": "Peer-reviewed publications in top-tier journals, focusing on machine learning methods and ferroic materials research",
+    "stats": {
+      "total": "Total Publications",
+      "firstAuthor": "First/Co-first Author",
+      "topJournals": "PRL/AM Papers",
+      "citations": "Total Citations"
+    },
+    "showAll": "Show All Publications",
+    "showLess": "Show Less",
+    "view": "View",
+    "highlight": "Highlight",
+    "preprint": "Preprint"
+  },
+  "research": {
+    "title": "Research",
+    "highlight": "Areas",
+    "subtitle": "Interdisciplinary research at the intersection of computational physics, materials science, and artificial intelligence",
+    "areas": {
+      "ml": {
+        "title": "Machine Learning Potentials",
+        "subtitle": "Neural Network Interatomic Potentials",
+        "desc": "Developing state-of-the-art machine learning potentials for magnetic materials, including SpinGNN and SpinGNN++ frameworks that incorporate physical symmetries and time-reversal equivariance."
+      },
+      "ferroelectric": {
+        "title": "Ferroelectric Materials",
+        "subtitle": "Novel Ferroelectric Phenomena",
+        "desc": "Investigating unconventional ferroelectricity in emerging materials, including sliding ferroelectrics, elemental ferroelectrics, and HfO₂-based ferroelectrics for next-generation memory devices."
+      },
+      "multiferroic": {
+        "title": "Multiferroic Materials",
+        "subtitle": "Magnetoelectric Coupling",
+        "desc": "Exploring multiferroic materials and magnetoelectric coupling phenomena, particularly in twisted van der Waals materials and moiré superlattices."
+      },
+      "computational": {
+        "title": "Computational Methods",
+        "subtitle": "First-Principles & Beyond",
+        "desc": "Developing and applying advanced computational methods, from first-principles calculations to large-scale machine learning simulations, for materials discovery and property prediction."
+      }
+    },
+    "software": "Software & Tools",
+    "platform": "AI for Materials Science Laboratory"
+  },
+  "recruitment": {
+    "title": "Join",
+    "highlight": "Our Team",
+    "subtitle": "We are looking for passionate researchers to join our group at Fudan University",
+    "positions": {
+      "phd": {
+        "title": "PhD Students",
+        "desc": "We welcome motivated students interested in computational physics, machine learning, and materials science. Full scholarship available.",
+        "requirements": [
+          "Bachelor's or Master's degree in Physics, Materials Science, or related fields",
+          "Strong programming skills (Python preferred)",
+          "Interest in machine learning and computational methods",
+          "Good English communication skills"
+        ],
+        "apply": "Apply for PhD"
+      },
+      "postdoc": {
+        "title": "Postdoctoral Researchers",
+        "desc": "We seek talented postdocs to lead innovative research projects at the intersection of AI and materials science.",
+        "requirements": [
+          "PhD in Physics, Materials Science, Chemistry, or related fields",
+          "Experience in computational methods or machine learning",
+          "Strong publication record",
+          "Ability to work independently and collaboratively"
+        ],
+        "apply": "Apply for Postdoc"
+      },
+      "visitor": {
+        "title": "Visiting Students",
+        "desc": "We welcome visiting students for short-term or long-term research collaborations.",
+        "requirements": [
+          "Currently enrolled in a degree program",
+          "Research interests aligned with our group",
+          "Self-funded or with scholarship support"
+        ],
+        "apply": "Contact Us"
+      }
+    },
+    "benefits": {
+      "title": "What We Offer",
+      "items": [
+        {
+          "title": "Cutting-edge Research",
+          "desc": "Work on frontier topics in AI for Science and functional materials"
+        },
+        {
+          "title": "Excellent Resources",
+          "desc": "Access to high-performance computing clusters and advanced software"
+        },
+        {
+          "title": "Collaborative Environment",
+          "desc": "Join a vibrant research community with international collaborations"
+        },
+        {
+          "title": "Career Development",
+          "desc": "Mentorship and support for your academic and professional growth"
+        }
+      ]
+    },
+    "cta": {
+      "title": "Interested in Joining?",
+      "desc": "Send your CV, research statement, and representative publications to",
+      "button": "Contact Now"
+    }
+  },
+  "contact": {
+    "title": "Get in",
+    "highlight": "Touch",
+    "subtitle": "Feel free to reach out for collaborations, research discussions, or any inquiries about my work",
+    "info": "Contact Information",
+    "online": "Find Me Online",
+    "collaboration": {
+      "title": "Interested in Collaboration?",
+      "desc": "I am always open to discussing new research ideas, potential collaborations, or opportunities in computational materials science and AI for Science.",
+      "button": "Send Email"
+    },
+    "labels": {
+      "email": "Email",
+      "position": "Position",
+      "location": "Location",
+      "department": "Department of Physics, Fudan University"
+    }
+  },
+  "footer": {
+    "rights": "All rights reserved.",
+    "madeWith": "Made with passion for science"
+  },
+  "theme": {
+    "light": "Light Mode",
+    "dark": "Dark Mode"
+  },
+  "language": {
+    "en": "English",
+    "zh": "中文"
+  }
+}

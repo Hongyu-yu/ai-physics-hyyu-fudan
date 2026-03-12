@@ -1,0 +1,205 @@
+{
+  "nav": {
+    "home": "首页",
+    "about": "关于",
+    "publications": "论文",
+    "research": "研究",
+    "recruitment": "加入我们",
+    "contact": "联系"
+  },
+  "hero": {
+    "title": "于宏宇",
+    "subtitle": "助理教授",
+    "department": "物理学系",
+    "university": "复旦大学",
+    "location": "中国上海",
+    "field": "凝聚态物理",
+    "description": "致力于计算物理和机器学习方法在铁性材料研究中的应用",
+    "contactBtn": "联系我",
+    "githubBtn": "GitHub",
+    "stats": {
+      "citations": "引用次数",
+      "hIndex": "h指数",
+      "i10Index": "i10指数",
+      "publications": "发表论文"
+    }
+  },
+  "about": {
+    "title": "关于",
+    "highlight": "我",
+    "subtitle": "计算物理学家，热衷于利用机器学习理解和设计新型功能材料",
+    "researchInterests": "研究兴趣",
+    "interests": {
+      "mlPotentials": {
+        "title": "机器学习势函数",
+        "desc": "开发基于神经网络的磁性和铁电材料原子间势函数"
+      },
+      "ferroic": {
+        "title": "铁性材料",
+        "desc": "面向下一代器件的铁电和多铁材料的计算研究"
+      },
+      "aiScience": {
+        "title": "AI for Science",
+        "desc": "应用深度学习方法加速材料发现和模拟"
+      }
+    },
+    "education": "教育背景",
+    "degrees": {
+      "phd": {
+        "degree": "凝聚态物理 博士",
+        "thesis": "博士论文：铁性材料的机器学习方法"
+      },
+      "bs": {
+        "degree": "物理学 学士（伯苓班）",
+        "thesis": "物理学荣誉项目，专注于理论物理"
+      }
+    },
+    "highlights": "研究亮点",
+    "achievements": {
+      "prl": "在 Physical Review Letters 发表2篇论文（2025）",
+      "am": "在 Advanced Materials 发表1篇论文（2025）",
+      "spingnn": "开发 SpinGNN++ - 综合磁性机器学习势函数",
+      "pasp": "参与 PASP 软件包开发"
+    }
+  },
+  "publications": {
+    "title": "精选",
+    "highlight": "论文",
+    "subtitle": "发表在顶级期刊的同行评审论文，专注于机器学习方法和铁性材料研究",
+    "stats": {
+      "total": "发表论文",
+      "firstAuthor": "第一/共同第一作者",
+      "topJournals": "PRL/AM 论文",
+      "citations": "总引用次数"
+    },
+    "showAll": "显示全部论文",
+    "showLess": "收起",
+    "view": "查看",
+    "highlight": "亮点",
+    "preprint": "预印本"
+  },
+  "research": {
+    "title": "研究",
+    "highlight": "方向",
+    "subtitle": "计算物理、材料科学和人工智能交叉领域的跨学科研究",
+    "areas": {
+      "ml": {
+        "title": "机器学习势函数",
+        "subtitle": "神经网络原子间势",
+        "desc": "为磁性材料开发最先进的机器学习势函数，包括纳入物理对称性和时间反演等变性的 SpinGNN 和 SpinGNN++ 框架。"
+      },
+      "ferroelectric": {
+        "title": "铁电材料",
+        "subtitle": "新型铁电现象",
+        "desc": "研究新兴材料中的非常规铁电性，包括滑动铁电、单质铁电和用于下一代存储器件的 HfO₂ 基铁电材料。"
+      },
+      "multiferroic": {
+        "title": "多铁材料",
+        "subtitle": "磁电耦合",
+        "desc": "探索多铁材料和磁电耦合现象，特别是在转角范德华材料和摩尔超晶格中。"
+      },
+      "computational": {
+        "title": "计算方法",
+        "subtitle": "第一性原理及超越",
+        "desc": "开发和应用先进的计算方法，从第一性原理计算到大规模机器学习模拟，用于材料发现和性质预测。"
+      }
+    },
+    "software": "软件与工具",
+    "platform": "AI物质科学实验室"
+  },
+  "recruitment": {
+    "title": "加入",
+    "highlight": "我们",
+    "subtitle": "我们欢迎充满热情的研究人员加入复旦大学我们的团队",
+    "positions": {
+      "phd": {
+        "title": "博士研究生",
+        "desc": "我们欢迎对计算物理、机器学习和材料科学感兴趣的有动力的学生。提供全额奖学金。",
+        "requirements": [
+          "物理、材料科学或相关领域的学士或硕士学位",
+          "较强的编程能力（偏好Python）",
+          "对机器学习和计算方法感兴趣",
+          "良好的英语沟通能力"
+        ],
+        "apply": "申请博士"
+      },
+      "postdoc": {
+        "title": "博士后研究员",
+        "desc": "我们寻求有才华的博士后，在人工智能和材料科学的交叉领域领导创新研究项目。",
+        "requirements": [
+          "物理、材料科学、化学或相关领域的博士学位",
+          "计算方法或机器学习经验",
+          "较强的发表论文记录",
+          "能够独立和协作工作"
+        ],
+        "apply": "申请博后"
+      },
+      "visitor": {
+        "title": "访问学生",
+        "desc": "我们欢迎访问学生进行短期或长期的研究合作。",
+        "requirements": [
+          "目前就读于学位课程",
+          "研究兴趣与我们的团队一致",
+          "自费或有奖学金支持"
+        ],
+        "apply": "联系我们"
+      }
+    },
+    "benefits": {
+      "title": "我们提供",
+      "items": [
+        {
+          "title": "前沿研究",
+          "desc": "从事AI for Science和功能材料的前沿课题"
+        },
+        {
+          "title": "优质资源",
+          "desc": "使用高性能计算集群和先进软件"
+        },
+        {
+          "title": "协作环境",
+          "desc": "加入具有国际合作的活跃研究社区"
+        },
+        {
+          "title": "职业发展",
+          "desc": "为您的学术和职业成长提供指导和支持"
+        }
+      ]
+    },
+    "cta": {
+      "title": "有兴趣加入吗？",
+      "desc": "请将您的简历、研究陈述和代表性论文发送至",
+      "button": "立即联系"
+    }
+  },
+  "contact": {
+    "title": "联系",
+    "highlight": "我们",
+    "subtitle": "欢迎就合作、研究讨论或任何关于我工作的询问与我们联系",
+    "info": "联系信息",
+    "online": "在线找到我",
+    "collaboration": {
+      "title": "对合作感兴趣？",
+      "desc": "我随时准备讨论新的研究想法、潜在的合作机会，或计算材料科学和AI for Science领域的机会。",
+      "button": "发送邮件"
+    },
+    "labels": {
+      "email": "电子邮箱",
+      "position": "职位",
+      "location": "地址",
+      "department": "复旦大学物理学系"
+    }
+  },
+  "footer": {
+    "rights": "版权所有",
+    "madeWith": "用对科学的热情制作"
+  },
+  "theme": {
+    "light": "日间模式",
+    "dark": "夜间模式"
+  },
+  "language": {
+    "en": "English",
+    "zh": "中文"
+  }
+}
