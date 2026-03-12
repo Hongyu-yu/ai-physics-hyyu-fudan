@@ -2,26 +2,14 @@ import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Mail, MapPin, Building2, Github, GraduationCap, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { scholarStats } from '@/data/scholarData';
+
+const scholarData = scholarStats;
 
 const contactInfo = [
-  {
-    icon: Mail,
-    label: 'labels.email',
-    value: 'hongyuyu20@fudan.edu.cn',
-    link: 'mailto:hongyuyu20@fudan.edu.cn',
-  },
-  {
-    icon: Building2,
-    label: 'labels.position',
-    value: 'hero.subtitle',
-    subvalue: 'labels.department',
-  },
-  {
-    icon: MapPin,
-    label: 'labels.location',
-    value: 'hero.location',
-  },
+  { icon: Mail, label: 'labels.email', value: 'hongyuyu20@fudan.edu.cn', link: 'mailto:hongyuyu20@fudan.edu.cn' },
+  { icon: Building2, label: 'labels.position', value: 'hero.subtitle', subvalue: 'labels.department' },
+  { icon: MapPin, label: 'labels.location', value: 'hero.location' },
 ];
 
 const externalLinks = [
@@ -29,15 +17,6 @@ const externalLinks = [
   { icon: Github, name: 'GitHub', link: 'https://github.com/Hongyu-yu' },
   { icon: ExternalLink, name: 'ResearchGate', link: 'https://www.researchgate.net/profile/Hongyu-Yu-6' },
 ];
-
-// Scholar data - will be updated by GitHub Actions
-const scholarData = {
-  citations: 541,
-  hIndex: 12,
-  i10Index: 22,
-  publications: 21,
-  topJournals: 3,
-};
 
 export default function Contact() {
   const { t } = useTranslation();
@@ -52,7 +31,7 @@ export default function Contact() {
           }
         });
       },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      { threshold: 0.1 }
     );
 
     const elements = sectionRef.current?.querySelectorAll('.reveal');
@@ -62,148 +41,101 @@ export default function Contact() {
   }, []);
 
   return (
-    <div ref={sectionRef} className="pt-24">
-      {/* Header */}
-      <section className="py-16 bg-gradient-to-br from-slate-50 via-blue-50/30 to-white dark:from-slate-950 dark:via-blue-950/10 dark:to-slate-900">
-        <div className="max-w-7xl mx-auto section-padding">
-          <div className="reveal opacity-0 text-center">
-            <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white mb-4">
-              {t('contact.title')} <span className="text-gradient">{t('contact.highlight')}</span>
-            </h1>
-            <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-              {t('contact.subtitle')}
-            </p>
-          </div>
+    <div ref={sectionRef} className="bg-white dark:bg-black">
+      {/* ── Page Header ── */}
+      <section className="pt-40 pb-20">
+        <div className="max-w-[1000px] mx-auto px-6 text-center space-y-6">
+          <h1 className="text-headline">
+            {t('contact.title')} <span className="text-[#0071e3]">{t('contact.highlight')}</span>
+          </h1>
+          <p className="text-[24px] text-[#86868b] dark:text-[#a1a1a6] leading-relaxed max-w-3xl mx-auto font-medium">
+            {t('contact.subtitle')}
+          </p>
         </div>
       </section>
 
-      {/* Contact Content */}
-      <section className="py-20 bg-white dark:bg-slate-900">
-        <div className="max-w-7xl mx-auto section-padding">
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Contact Information */}
-            <div className="reveal opacity-0 stagger-1 space-y-6">
-              <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-6">
-                {t('contact.info')}
-              </h2>
-              
-              {contactInfo.map((item, index) => (
-                <Card
-                  key={index}
-                  className="border-slate-200 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-700 transition-colors"
-                >
-                  <CardContent className="p-6">
-                    <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center flex-shrink-0">
-                        <item.icon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                      </div>
-                      <div>
-                        <p className="text-sm text-slate-500 dark:text-slate-400 mb-1">
-                          {t(item.label)}
-                        </p>
-                        {item.link ? (
-                          <a
-                            href={item.link}
-                            className="text-lg font-semibold text-slate-900 dark:text-white hover:text-blue-700 dark:hover:text-blue-400 transition-colors"
-                          >
-                            {item.value}
-                          </a>
-                        ) : (
-                          <>
-                            <p className="text-lg font-semibold text-slate-900 dark:text-white">
-                              {item.value.startsWith('hero.') ? t(item.value) : item.value}
-                            </p>
-                            {item.subvalue && (
-                              <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
-                                {t(item.subvalue)}
-                              </p>
-                            )}
-                          </>
-                        )}
-                      </div>
+      {/* ── Main Layout ── */}
+      <section className="py-20 bg-[#f5f5f7] dark:bg-[#111111]">
+        <div className="max-w-[1100px] mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            
+            <div className="reveal opacity-0 stagger-1 space-y-8">
+              <h2 className="text-[32px] font-semibold tracking-tight">Direct Channels</h2>
+              <div className="space-y-6">
+                {contactInfo.map((item, idx) => (
+                  <div key={idx} className="apple-card p-10 bg-white dark:bg-[#1c1c1e] flex items-center gap-8">
+                    <div className="w-16 h-16 rounded-3xl bg-[#f5f5f7] dark:bg-white/5 flex items-center justify-center flex-shrink-0">
+                      <item.icon className="w-8 h-8 text-[#0071e3]" />
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
+                    <div>
+                      <p className="text-[12px] uppercase tracking-widest text-[#86868b] font-bold mb-1">{t(item.label)}</p>
+                      {item.link ? (
+                        <a href={item.link} className="text-[21px] font-semibold hover:text-[#0071e3] transition-colors">{item.value}</a>
+                      ) : (
+                        <p className="text-[21px] font-semibold leading-snug">
+                          {item.value.startsWith('hero.') ? t(item.value) : item.value}
+                          {item.subvalue && <span className="block text-[15px] font-normal text-[#86868b] mt-1">{t(item.subvalue)}</span>}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
 
-              {/* Quick Action */}
-              <div className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl p-6 text-white">
-                <h3 className="text-lg font-semibold mb-2">
-                  {t('contact.collaboration.title')}
-                </h3>
-                <p className="text-blue-100 text-sm mb-4">
-                  {t('contact.collaboration.desc')}
-                </p>
-                <Button
-                  asChild
-                  className="bg-white text-blue-700 hover:bg-blue-50"
-                >
+              <div className="apple-card p-12 bg-[#0071e3] text-white space-y-6">
+                <h3 className="text-[28px] font-semibold">{t('contact.collaboration.title')}</h3>
+                <p className="text-[18px] text-white/80 leading-relaxed">{t('contact.collaboration.desc')}</p>
+                <Button asChild className="apple-button h-14 px-8 bg-white text-[#0071e3] hover:bg-white/90">
                   <a href="mailto:hongyuyu20@fudan.edu.cn">
-                    <Mail className="w-4 h-4 mr-2" />
+                    <Mail className="w-5 h-5 mr-3" />
                     {t('contact.collaboration.button')}
                   </a>
                 </Button>
               </div>
             </div>
 
-            {/* External Links */}
-            <div className="reveal opacity-0 stagger-2">
-              <h2 className="text-xl font-semibold text-slate-900 dark:text-white mb-6">
-                {t('contact.online')}
-              </h2>
-              <div className="space-y-4">
-                {externalLinks.map((link, index) => (
-                  <a
-                    key={index}
-                    href={link.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-center gap-4 p-6 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-lg transition-all duration-300"
-                  >
-                    <div className="w-14 h-14 bg-white dark:bg-slate-700 rounded-xl flex items-center justify-center group-hover:bg-blue-100 dark:group-hover:bg-blue-900/30 transition-colors">
-                      <link.icon className="w-7 h-7 text-slate-600 dark:text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" />
+            <div className="reveal opacity-0 stagger-2 space-y-8">
+              <h2 className="text-[32px] font-semibold tracking-tight">Digital Presence</h2>
+              <div className="grid gap-4">
+                {externalLinks.map((link, idx) => (
+                  <a key={idx} href={link.link} target="_blank" rel="noopener noreferrer" 
+                     className="group apple-card p-8 bg-white dark:bg-[#1c1c1e] flex items-center justify-between hover:bg-[#f5f5f7] dark:hover:bg-white/5 transition-all">
+                    <div className="flex items-center gap-6">
+                      <div className="w-14 h-14 rounded-2xl bg-[#f5f5f7] dark:bg-white/5 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <link.icon className="w-7 h-7 text-[#0071e3]" />
+                      </div>
+                      <div>
+                        <h4 className="text-[21px] font-semibold mb-1">{link.name}</h4>
+                        <p className="text-[14px] text-[#86868b]">View full scientific portfolio</p>
+                      </div>
                     </div>
-                    <div className="flex-1">
-                      <h4 className="text-lg font-semibold text-slate-900 dark:text-white group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors">
-                        {link.name}
-                      </h4>
-                      <p className="text-sm text-slate-500 dark:text-slate-400">
-                        View profile and publications
-                      </p>
-                    </div>
-                    <ExternalLink className="w-5 h-5 text-slate-400 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" />
+                    <ExternalLink className="w-6 h-6 text-[#d2d2d7] group-hover:text-[#0071e3] transition-colors" />
                   </a>
                 ))}
               </div>
 
-              {/* Academic Profile Summary */}
-              <div className="mt-8 p-6 bg-slate-900 dark:bg-slate-950 rounded-2xl text-white">
-                <h4 className="text-lg font-semibold mb-4">
-                  Academic Profile
-                </h4>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="text-center p-4 bg-slate-800 rounded-xl">
-                    <div className="text-2xl font-bold text-blue-400">{scholarData.citations}</div>
-                    <div className="text-xs text-slate-400">{t('hero.stats.citations')}</div>
-                  </div>
-                  <div className="text-center p-4 bg-slate-800 rounded-xl">
-                    <div className="text-2xl font-bold text-blue-400">{scholarData.hIndex}</div>
-                    <div className="text-xs text-slate-400">{t('hero.stats.hIndex')}</div>
-                  </div>
-                  <div className="text-center p-4 bg-slate-800 rounded-xl">
-                    <div className="text-2xl font-bold text-blue-400">{scholarData.publications}</div>
-                    <div className="text-xs text-slate-400">{t('hero.stats.publications')}</div>
-                  </div>
-                  <div className="text-center p-4 bg-slate-800 rounded-xl">
-                    <div className="text-2xl font-bold text-blue-400">{scholarData.topJournals}</div>
-                    <div className="text-xs text-slate-400">PRL/AM Papers</div>
-                  </div>
+              <div className="apple-card p-12 bg-black text-white">
+                <h3 className="text-[24px] font-semibold mb-8">Academic Impact</h3>
+                <div className="grid grid-cols-2 gap-8">
+                  {[
+                    { val: scholarData.citations, lbl: 'hero.stats.citations' },
+                    { val: scholarData.hIndex, lbl: 'hero.stats.hIndex' },
+                    { val: scholarData.publications, lbl: 'hero.stats.publications' },
+                    { val: scholarData.topJournals, lbl: 'PRL/AM Papers' },
+                  ].map((stat, i) => (
+                    <div key={i} className="space-y-1">
+                      <div className="text-[40px] font-semibold tracking-tighter text-[#2997ff]">{stat.val}</div>
+                      <div className="text-[11px] uppercase tracking-widest text-[#86868b] font-bold">{typeof stat.lbl === 'string' && stat.lbl.includes('.') ? t(stat.lbl) : stat.lbl}</div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </section>
     </div>
   );
 }
+

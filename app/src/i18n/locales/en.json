@@ -7,14 +7,24 @@
     "recruitment": "Join Us",
     "contact": "Contact"
   },
+  "home": {
+    "researchDesc": "AI Physicist, ML physics methods, ferroic & multiferroic materials",
+    "recruitmentDesc": "PhD, Postdoc and Undergraduate Intern positions available",
+    "viewAll": "View All",
+    "explore": "Explore",
+    "learnMore": "Learn More",
+    "highlightsTitle": "Recent Highlights",
+    "highlightsSubtitle": "Selected publications from 2025",
+    "viewAllPublications": "View all publications"
+  },
   "hero": {
     "title": "Hongyu",
     "subtitle": "Assistant Professor",
-    "department": "Department of Physics",
+    "department": "Institute of Computational Physical Sciences",
     "university": "Fudan University",
     "location": "Shanghai, China",
-    "field": "Condensed Matter Physics",
-    "description": "Specializing in computational physics and machine learning methods for ferroic materials research.",
+    "field": "AI for Physical Science",
+    "description": "Developing AI Physicist systems — Physics JARVIS — to drive a phase transition in computational physics research paradigms.",
     "contactBtn": "Contact Me",
     "githubBtn": "GitHub",
     "stats": {
@@ -27,7 +37,7 @@
   "about": {
     "title": "About",
     "highlight": "Me",
-    "subtitle": "Computational physicist passionate about leveraging machine learning to understand and design novel functional materials",
+    "subtitle": "9 years of AI Physics experience, building AI Physicists and better AI physics methods",
     "researchInterests": "Research Interests",
     "interests": {
       "mlPotentials": {
@@ -75,8 +85,13 @@
     "showAll": "Show All Publications",
     "showLess": "Show Less",
     "view": "View",
-    "highlight": "Highlight",
-    "preprint": "Preprint"
+    "preprint": "Preprint",
+    "firstAuthorTitle": "First & Co-first Author Publications",
+    "citations": "Citations",
+    "sectionFirst": "First Author",
+    "sectionCoFirst": "Co-first Author",
+    "sectionOther": "Other Contributions",
+    "papers": "papers"
   },
   "research": {
     "title": "Research",
@@ -84,9 +99,9 @@
     "subtitle": "Interdisciplinary research at the intersection of computational physics, materials science, and artificial intelligence",
     "areas": {
       "ml": {
-        "title": "Machine Learning Potentials",
-        "subtitle": "Neural Network Interatomic Potentials",
-        "desc": "Developing state-of-the-art machine learning potentials for magnetic materials, including SpinGNN and SpinGNN++ frameworks that incorporate physical symmetries and time-reversal equivariance."
+        "title": "ML Physics Method Development",
+        "subtitle": "AI-Driven Physics Modeling Tools",
+        "desc": "Developing machine learning methods and tools for physical systems, including SpinGNN/SpinGNN++ magnetic potential frameworks, HamGNN Hamiltonian prediction network, deeply integrating physical symmetries with deep learning."
       },
       "ferroelectric": {
         "title": "Ferroelectric Materials",
@@ -102,74 +117,106 @@
         "title": "Computational Methods",
         "subtitle": "First-Principles & Beyond",
         "desc": "Developing and applying advanced computational methods, from first-principles calculations to large-scale machine learning simulations, for materials discovery and property prediction."
+      },
+      "aiPhysicist": {
+        "title": "AI Physicist",
+        "subtitle": "Physics JARVIS",
+        "desc": "Developing AI Physicist systems — Physics JARVIS that autonomously performs physics modeling, simulation and analysis. Building better AI physics method tools to drive a phase transition in research paradigms."
       }
     },
     "software": "Software & Tools",
-    "platform": "AI for Materials Science Laboratory"
+    "platform": "AI for Materials Science Laboratory",
+    "keyAchievements": "Key Achievements:",
+    "viewOnGithub": "View on GitHub",
+    "visitPlatform": "Visit Platform",
+    "platformDesc": "Contributing to sci-ai.cn — a platform integrating AI computational tools for materials science research, promoting the application of artificial intelligence in condensed matter physics."
   },
   "recruitment": {
     "title": "Join",
-    "highlight": "Our Team",
-    "subtitle": "We are looking for passionate researchers to join our group at Fudan University",
+    "highlight": "Us",
+    "subtitle": "An AI-Native research group pioneering the future of computational science",
+    "hero": {
+      "headline": "Build Physics JARVIS Together",
+      "subheadline": "Focused on AI Physics. Embrace the phase transition of research paradigms."
+    },
+    "benefits": {
+      "title": "Why Join Us",
+      "aiNative": {
+        "title": "AI-Native Full-Process Research",
+        "desc": "Fully automated computational physics workflow ready — come try, refine, and improve it"
+      },
+      "resources": {
+        "title": "Abundant AI API Resources",
+        "desc": "Not afraid you'll use too much — afraid you won't use it at all"
+      },
+      "mentors": {
+        "title": "Distinguished Mentors",
+        "desc": "Joint mentoring by NSFC Scholar Prof. Xiang Hongjun and Academician Gong Xingao, 9 years of AI4S experience"
+      },
+      "openclaw": {
+        "title": "OpenClaw Platform",
+        "desc": "Raise physics shrimp via API — learn computational physics through play"
+      },
+      "aiForScience": {
+        "title": "AI for Physical Science",
+        "desc": "Use Physics JARVIS for research — focused on AI Physicist development and application"
+      },
+      "growth": {
+        "title": "Rapid Growth",
+        "desc": "Publications in top journals (PRL, AM), international collaborations, comprehensive mentorship"
+      }
+    },
+    "openclaw": {
+      "title": "OpenClaw: Your Physics Playground",
+      "desc": "OpenClaw provides APIs for you to freely explore physics shrimp simulation systems and learn computational physics hands-on",
+      "feature1": "Ready-to-use API interface",
+      "feature2": "Rich physics simulation scenarios",
+      "feature3": "Zero barrier to entry"
+    },
+    "fomo": {
+      "title": "Embrace the Phase Transition of Research",
+      "subtitle": "9 years of AI for Science experience — since AlphaGo",
+      "desc": "AI is reshaping research. Use Physics JARVIS for science. Join us to embrace this phase transition.",
+      "cta": "Contact Us Now"
+    },
     "positions": {
       "phd": {
         "title": "PhD Students",
-        "desc": "We welcome motivated students interested in computational physics, machine learning, and materials science. Full scholarship available.",
+        "desc": "We welcome students who love physics and are passionate about tinkering with AI to realize research ideals together.",
         "requirements": [
-          "Bachelor's or Master's degree in Physics, Materials Science, or related fields",
-          "Strong programming skills (Python preferred)",
-          "Interest in machine learning and computational methods",
-          "Good English communication skills"
+          "Bachelor's or Master's in Physics or AI-related fields",
+          "Rich vibe coding and research experience",
+          "Passion for tinkering with AI and exploring physics",
+          "Enthusiasm for AI for Science"
         ],
         "apply": "Apply for PhD"
       },
       "postdoc": {
         "title": "Postdoctoral Researchers",
-        "desc": "We seek talented postdocs to lead innovative research projects at the intersection of AI and materials science.",
+        "desc": "Seeking like-minded postdocs to lead frontier research on AI Physicist.",
         "requirements": [
-          "PhD in Physics, Materials Science, Chemistry, or related fields",
-          "Experience in computational methods or machine learning",
-          "Strong publication record",
-          "Ability to work independently and collaboratively"
+          "PhD in Physics or AI-related fields",
+          "Rich vibe coding and research experience",
+          "Passion for tinkering with AI and exploring physics",
+          "Independent and collaborative research ability"
         ],
         "apply": "Apply for Postdoc"
       },
       "visitor": {
-        "title": "Visiting Students",
-        "desc": "We welcome visiting students for short-term or long-term research collaborations.",
+        "title": "Undergraduate Research Interns",
+        "desc": "Welcome undergraduates to join our group for research internships.",
         "requirements": [
-          "Currently enrolled in a degree program",
-          "Research interests aligned with our group",
-          "Self-funded or with scholarship support"
+          "Currently enrolled in Physics or AI-related programs",
+          "Passion for tinkering with AI and exploring physics",
+          "Interest in computational physics or AI for Science"
         ],
         "apply": "Contact Us"
       }
     },
-    "benefits": {
-      "title": "What We Offer",
-      "items": [
-        {
-          "title": "Cutting-edge Research",
-          "desc": "Work on frontier topics in AI for Science and functional materials"
-        },
-        {
-          "title": "Excellent Resources",
-          "desc": "Access to high-performance computing clusters and advanced software"
-        },
-        {
-          "title": "Collaborative Environment",
-          "desc": "Join a vibrant research community with international collaborations"
-        },
-        {
-          "title": "Career Development",
-          "desc": "Mentorship and support for your academic and professional growth"
-        }
-      ]
-    },
     "cta": {
-      "title": "Interested in Joining?",
-      "desc": "Send your CV, research statement, and representative publications to",
-      "button": "Contact Now"
+      "title": "Interested? Get in Touch",
+      "desc": "Feel free to contact us anytime",
+      "button": "Send Email"
     }
   },
   "contact": {
@@ -187,7 +234,7 @@
       "email": "Email",
       "position": "Position",
       "location": "Location",
-      "department": "Department of Physics, Fudan University"
+      "department": "Institute of Computational Physical Sciences, Fudan University"
     }
   },
   "footer": {

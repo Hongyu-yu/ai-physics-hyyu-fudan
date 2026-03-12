@@ -3,31 +3,14 @@ import { useTranslation } from 'react-i18next';
 import { BookOpen, Award, Users, Code2, Microscope, Lightbulb, GraduationCap } from 'lucide-react';
 
 const researchInterests = [
-  {
-    icon: Microscope,
-    key: 'mlPotentials',
-  },
-  {
-    icon: Lightbulb,
-    key: 'ferroic',
-  },
-  {
-    icon: Code2,
-    key: 'aiScience',
-  },
+  { icon: Microscope, key: 'mlPotentials' },
+  { icon: Lightbulb, key: 'ferroic' },
+  { icon: Code2, key: 'aiScience' },
 ];
 
 const education = [
-  {
-    key: 'phd',
-    institution: 'Fudan University',
-    period: '2020 - 2025',
-  },
-  {
-    key: 'bs',
-    institution: 'Nankai University',
-    period: '2016 - 2020',
-  },
+  { key: 'phd', institution: 'Fudan University', period: '2020 - 2025' },
+  { key: 'bs', institution: 'Nankai University', period: '2016 - 2020' },
 ];
 
 const highlights = [
@@ -51,7 +34,7 @@ export default function About() {
           }
         });
       },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      { threshold: 0.1 }
     );
 
     const elements = sectionRef.current?.querySelectorAll('.reveal');
@@ -61,154 +44,106 @@ export default function About() {
   }, []);
 
   return (
-    <div ref={sectionRef} className="pt-24">
-      {/* Header */}
-      <section className="py-16 bg-gradient-to-br from-slate-50 via-blue-50/30 to-white dark:from-slate-950 dark:via-blue-950/10 dark:to-slate-900">
-        <div className="max-w-7xl mx-auto section-padding">
-          <div className="reveal opacity-0 text-center">
-            <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white mb-4">
-              {t('about.title')} <span className="text-gradient">{t('about.highlight')}</span>
+    <div ref={sectionRef} className="bg-white dark:bg-black">
+      {/* ── Page Header ── */}
+      <section className="pt-40 pb-20">
+        <div className="max-w-[1000px] mx-auto px-6">
+          <div className="reveal opacity-0 text-center space-y-6">
+            <h1 className="text-headline text-[#1d1d1f] dark:text-white">
+              {t('about.title')} <span className="text-[#0071e3]">{t('about.highlight')}</span>
             </h1>
-            <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
+            <p className="text-[24px] text-[#86868b] dark:text-[#a1a1a6] leading-relaxed max-w-3xl mx-auto">
               {t('about.subtitle')}
             </p>
           </div>
         </div>
       </section>
 
-      {/* Research Interests */}
-      <section className="py-20 bg-white dark:bg-slate-900">
-        <div className="max-w-7xl mx-auto section-padding">
-          <div className="reveal opacity-0 text-center mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
-              {t('about.researchInterests')}
-            </h2>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {researchInterests.map((item, index) => (
-              <div
-                key={index}
-                className="reveal opacity-0 group p-8 bg-slate-50 dark:bg-slate-800 rounded-2xl hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-300 hover:shadow-lg hover:shadow-blue-100/50 dark:hover:shadow-blue-900/20 border border-slate-100 dark:border-slate-700 hover:border-blue-200 dark:hover:border-blue-800"
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="w-14 h-14 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors duration-300">
-                  <item.icon className="w-7 h-7 text-blue-600 dark:text-blue-400 group-hover:text-white transition-colors duration-300" />
-                </div>
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">
-                  {t(`about.interests.${item.key}.title`)}
-                </h3>
-                <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
-                  {t(`about.interests.${item.key}.desc`)}
-                </p>
+      {/* ── Key Metrics ── */}
+      <section className="py-20 border-y border-black/[0.05] dark:border-white/[0.05]">
+        <div className="max-w-[1000px] mx-auto px-6">
+          <div className="grid grid-cols-3 gap-8">
+            {highlights.map((item, idx) => (
+              <div key={idx} className="reveal opacity-0 text-center space-y-2">
+                <div className="text-[48px] font-semibold text-[#1d1d1f] dark:text-white tracking-tighter">{item.value}</div>
+                <div className="text-[13px] uppercase tracking-wider text-[#86868b] font-medium">{t(`publications.stats.${item.labelKey}`)}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Education & Highlights */}
-      <section className="py-20 bg-slate-50 dark:bg-slate-800/50">
-        <div className="max-w-7xl mx-auto section-padding">
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Education */}
-            <div className="reveal opacity-0">
-              <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-8">
-                {t('about.education')}
-              </h2>
-              <div className="space-y-6">
-                {education.map((edu, index) => (
-                  <div
-                    key={index}
-                    className="relative pl-8 pb-6 border-l-2 border-blue-200 dark:border-blue-800 last:pb-0"
-                  >
-                    <div className="absolute left-0 top-0 w-4 h-4 bg-blue-600 rounded-full -translate-x-[9px]" />
-                    <div className="bg-white dark:bg-slate-800 rounded-xl p-6 border border-slate-100 dark:border-slate-700 shadow-sm">
-                      <div className="flex flex-wrap items-center gap-2 mb-2">
-                        <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
-                          {t(`about.degrees.${edu.key}.degree`)}
-                        </h3>
-                        <span className="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 text-sm rounded-full">
-                          {edu.period}
-                        </span>
-                      </div>
-                      <p className="text-blue-700 dark:text-blue-400 font-medium mb-2">
-                        {edu.institution}
-                      </p>
-                      <p className="text-slate-600 dark:text-slate-400 text-sm">
-                        {t(`about.degrees.${edu.key}.thesis`)}
-                      </p>
+      {/* ── Research Interests ── */}
+      <section className="py-32 bg-[#f5f5f7] dark:bg-[#111111]">
+        <div className="max-w-[1100px] mx-auto px-6">
+          <div className="grid lg:grid-cols-3 gap-8">
+            {researchInterests.map((item, idx) => (
+              <div key={idx} className="reveal opacity-0 stagger-1 apple-card p-10 flex flex-col items-center text-center">
+                <div className="w-16 h-16 rounded-3xl bg-white dark:bg-black flex items-center justify-center mb-8 shadow-sm">
+                  <item.icon className="w-8 h-8 text-[#0071e3]" />
+                </div>
+                <h3 className="text-[21px] font-semibold mb-4">{t(`about.interests.${item.key}.title`)}</h3>
+                <p className="text-[16px] text-[#86868b] leading-relaxed">{t(`about.interests.${item.key}.desc`)}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Education Timeline ── */}
+      <section className="py-32">
+        <div className="max-w-[1000px] mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-20">
+            <div className="reveal opacity-0 space-y-12">
+              <h2 className="text-[32px] font-semibold tracking-tight">{t('about.education')}</h2>
+              <div className="space-y-10">
+                {education.map((edu, idx) => (
+                  <div key={idx} className="group relative pl-8 border-l-2 border-[#f5f5f7] dark:border-white/10 hover:border-[#0071e3] transition-colors duration-500">
+                    <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-white dark:bg-black border-2 border-[#f5f5f7] dark:border-white/10 group-hover:border-[#0071e3] transition-colors" />
+                    <div className="space-y-2">
+                      <span className="text-[13px] font-bold text-[#86868b]">{edu.period}</span>
+                      <h3 className="text-[21px] font-semibold text-[#1d1d1f] dark:text-white">{t(`about.degrees.${edu.key}.degree`)}</h3>
+                      <p className="text-[#0071e3] font-medium">{edu.institution}</p>
+                      <p className="text-[15px] text-[#86868b] italic">{t(`about.degrees.${edu.key}.thesis`)}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Highlights */}
-            <div className="reveal opacity-0 stagger-2">
-              <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-8">
-                {t('about.highlights')}
-              </h2>
-              <div className="grid grid-cols-3 gap-4 mb-8">
-                {highlights.map((item, index) => (
-                  <div
-                    key={index}
-                    className="text-center p-6 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl border border-blue-100 dark:border-blue-800"
-                  >
-                    <item.icon className="w-8 h-8 text-blue-600 dark:text-blue-400 mx-auto mb-3" />
-                    <div className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
-                      {item.value}
-                    </div>
-                    <div className="text-xs text-slate-600 dark:text-slate-400 mt-1">
-                      {t(`publications.stats.${item.labelKey}`)}
-                    </div>
+            <div className="reveal opacity-0 stagger-2 space-y-12">
+              <h2 className="text-[32px] font-semibold tracking-tight">Key Achievements</h2>
+              <div className="apple-card-flat p-10 space-y-8">
+                {achievements.map((key, i) => (
+                  <div key={i} className="flex gap-4">
+                    <Award className="w-6 h-6 text-[#0071e3] flex-shrink-0" />
+                    <p className="text-[17px] text-[#1d1d1f] dark:text-[#d2d2d7] leading-snug">{t(`about.achievements.${key}`)}</p>
                   </div>
                 ))}
-              </div>
-
-              {/* Key Achievements */}
-              <div className="bg-slate-900 dark:bg-slate-950 rounded-2xl p-6 text-white">
-                <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-                  <Award className="w-5 h-5 text-blue-400" />
-                  Key Achievements
-                </h3>
-                <ul className="space-y-3">
-                  {achievements.map((key, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0" />
-                      <span className="text-slate-300 text-sm">
-                        {t(`about.achievements.${key}`)}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Current Position */}
-      <section className="py-20 bg-white dark:bg-slate-900">
-        <div className="max-w-7xl mx-auto section-padding">
-          <div className="reveal opacity-0 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-3xl p-8 md:p-12 text-white text-center">
-            <GraduationCap className="w-16 h-16 mx-auto mb-6 text-blue-200" />
-            <h2 className="text-3xl font-bold mb-4">
-              Current Position
-            </h2>
-            <p className="text-xl text-blue-100 mb-2">
-              {t('hero.subtitle')}
-            </p>
-            <p className="text-lg text-blue-200 mb-6">
-              {t('hero.department')}<br />
-              {t('hero.university')}
-            </p>
-            <p className="text-blue-100 max-w-2xl mx-auto">
-              Leading research in computational physics and machine learning methods for ferroic materials. 
-              Open to collaborations and new research opportunities.
-            </p>
+      {/* ── Position Banner ── */}
+      <section className="py-32 bg-black text-white">
+        <div className="max-w-[1000px] mx-auto px-6 text-center space-y-8">
+          <div className="reveal opacity-0 w-20 h-20 rounded-full bg-white/10 mx-auto flex items-center justify-center">
+            <GraduationCap className="w-10 h-10 text-white" />
           </div>
+          <h2 className="reveal opacity-0 stagger-1 text-[40px] font-semibold tracking-tight">Current Focus</h2>
+          <div className="reveal opacity-0 stagger-2 space-y-4">
+            <p className="text-[24px] font-medium text-[#2997ff]">{t('hero.subtitle')}</p>
+            <p className="text-[19px] text-[#a1a1a6]">{t('hero.department')} &middot; {t('hero.university')}</p>
+          </div>
+          <p className="reveal opacity-0 stagger-3 text-[19px] text-[#86868b] max-w-2xl mx-auto leading-relaxed">
+            Leading research in computational physics and machine learning methods for ferroic materials. 
+            Actively seeking talented students and researchers to join our group.
+          </p>
         </div>
       </section>
     </div>
   );
 }
+

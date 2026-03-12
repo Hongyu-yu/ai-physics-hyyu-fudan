@@ -7,14 +7,24 @@
     "recruitment": "加入我们",
     "contact": "联系"
   },
+  "home": {
+    "researchDesc": "AI 物理学家、机器学习物理方法、铁性与多铁材料",
+    "recruitmentDesc": "招收博士生、博后及本科生科研实习",
+    "viewAll": "查看全部",
+    "explore": "了解更多",
+    "learnMore": "了解更多",
+    "highlightsTitle": "最新亮点",
+    "highlightsSubtitle": "2025年精选论文",
+    "viewAllPublications": "查看全部论文"
+  },
   "hero": {
     "title": "于宏宇",
     "subtitle": "助理教授",
-    "department": "物理学系",
+    "department": "计算物质科学研究所",
     "university": "复旦大学",
     "location": "中国上海",
-    "field": "凝聚态物理",
-    "description": "致力于计算物理和机器学习方法在铁性材料研究中的应用",
+    "field": "AI for Physical Science",
+    "description": "致力于 AI 物理学家的开发与应用，打造物理贾维斯，推动计算物理科研范式的相变",
     "contactBtn": "联系我",
     "githubBtn": "GitHub",
     "stats": {
@@ -27,7 +37,7 @@
   "about": {
     "title": "关于",
     "highlight": "我",
-    "subtitle": "计算物理学家，热衷于利用机器学习理解和设计新型功能材料",
+    "subtitle": "9年AI Physics 经验，致力于打造 AI物理学家和更好的AI物理方法",
     "researchInterests": "研究兴趣",
     "interests": {
       "mlPotentials": {
@@ -75,8 +85,13 @@
     "showAll": "显示全部论文",
     "showLess": "收起",
     "view": "查看",
-    "highlight": "亮点",
-    "preprint": "预印本"
+    "preprint": "预印本",
+    "firstAuthorTitle": "第一作者及共同第一作者论文",
+    "citations": "引用",
+    "sectionFirst": "第一作者论文",
+    "sectionCoFirst": "共同第一作者论文",
+    "sectionOther": "其他高引用论文",
+    "papers": "篇"
   },
   "research": {
     "title": "研究",
@@ -84,9 +99,9 @@
     "subtitle": "计算物理、材料科学和人工智能交叉领域的跨学科研究",
     "areas": {
       "ml": {
-        "title": "机器学习势函数",
-        "subtitle": "神经网络原子间势",
-        "desc": "为磁性材料开发最先进的机器学习势函数，包括纳入物理对称性和时间反演等变性的 SpinGNN 和 SpinGNN++ 框架。"
+        "title": "机器学习物理方法开发",
+        "subtitle": "AI 驱动的物理建模工具",
+        "desc": "开发面向物理系统的机器学习方法与工具，包括 SpinGNN/SpinGNN++ 磁性势函数框架、HamGNN 哈密顿量预测网络等，将物理对称性与深度学习深度融合。"
       },
       "ferroelectric": {
         "title": "铁电材料",
@@ -102,74 +117,106 @@
         "title": "计算方法",
         "subtitle": "第一性原理及超越",
         "desc": "开发和应用先进的计算方法，从第一性原理计算到大规模机器学习模拟，用于材料发现和性质预测。"
+      },
+      "aiPhysicist": {
+        "title": "AI 物理学家",
+        "subtitle": "物理贾维斯",
+        "desc": "开发 AI 物理学家系统，打造物理贾维斯——让 AI 自主进行物理建模、模拟与分析，构建更好的 AI 物理方法工具，推动科研范式的相变。"
       }
     },
     "software": "软件与工具",
-    "platform": "AI物质科学实验室"
+    "platform": "AI物质科学实验室",
+    "keyAchievements": "主要成果：",
+    "viewOnGithub": "在 GitHub 查看",
+    "visitPlatform": "访问平台",
+    "platformDesc": "参与建设 sci-ai.cn —— 一个集成 AI 计算工具的材料科学研究平台，推动人工智能在凝聚态物理中的应用。"
   },
   "recruitment": {
     "title": "加入",
     "highlight": "我们",
-    "subtitle": "我们欢迎充满热情的研究人员加入复旦大学我们的团队",
+    "subtitle": "AI-Native 全流程 AI 科研课题组，期待志同道合的你",
+    "hero": {
+      "headline": "共建物理贾维斯",
+      "subheadline": "聚焦 AI Physics，迎接科研范式的相变"
+    },
+    "benefits": {
+      "title": "为什么选择我们",
+      "aiNative": {
+        "title": "AI-Native 全流程科研",
+        "desc": "全自动计算物理工作流已就绪，欢迎你来试用、打磨、改进"
+      },
+      "resources": {
+        "title": "AI API 充分供应",
+        "desc": "不怕你蹬，就怕你不用——充足的 AI 资源助力科研加速"
+      },
+      "mentors": {
+        "title": "强强联合",
+        "desc": "杰青向红军教授 × 龚新高院士联合指导，9年 AI for Science 经验"
+      },
+      "openclaw": {
+        "title": "OpenClaw 平台",
+        "desc": "养物理虾，边玩边科研，趣味探索计算物理新范式"
+      },
+      "aiForScience": {
+        "title": "AI for Physical Science",
+        "desc": "使用物理贾维斯做科研，聚焦 AI 物理学家的开发与应用"
+      },
+      "growth": {
+        "title": "快速成长",
+        "desc": "顶刊发表（PRL、AM）、国际合作、全方位学术指导"
+      }
+    },
+    "openclaw": {
+      "title": "OpenClaw：你的物理游乐场",
+      "desc": "OpenClaw 提供 API 接口，让你自由探索物理虾模拟系统，在实践中学习计算物理",
+      "feature1": "即开即用的 API 接口",
+      "feature2": "丰富的物理模拟场景",
+      "feature3": "零门槛上手体验"
+    },
+    "fomo": {
+      "title": "迎接科研范式的相变",
+      "subtitle": "9年 AI for Science 经验，从 AlphaGo 至今",
+      "desc": "AI 正在重塑科研，使用物理贾维斯做科研，加入我们迎接这场相变。",
+      "cta": "立即联系我们"
+    },
     "positions": {
       "phd": {
         "title": "博士研究生",
-        "desc": "我们欢迎对计算物理、机器学习和材料科学感兴趣的有动力的学生。提供全额奖学金。",
+        "desc": "欢迎爱物理、热爱折腾 AI 的同学加入，一起用 AI 实现科研理想。",
         "requirements": [
-          "物理、材料科学或相关领域的学士或硕士学位",
-          "较强的编程能力（偏好Python）",
-          "对机器学习和计算方法感兴趣",
-          "良好的英语沟通能力"
+          "物理或 AI 相关领域学士/硕士学位",
+          "丰富的 vibe coding 和 research 经验",
+          "热爱折腾 AI 和探索物理",
+          "对 AI for Science 充满热情"
         ],
         "apply": "申请博士"
       },
       "postdoc": {
         "title": "博士后研究员",
-        "desc": "我们寻求有才华的博士后，在人工智能和材料科学的交叉领域领导创新研究项目。",
+        "desc": "寻求志同道合的博后，在 AI 物理学家方向引领前沿研究。",
         "requirements": [
-          "物理、材料科学、化学或相关领域的博士学位",
-          "计算方法或机器学习经验",
-          "较强的发表论文记录",
-          "能够独立和协作工作"
+          "物理或 AI 相关领域博士学位",
+          "丰富的 vibe coding 和 research 经验",
+          "热爱折腾 AI 和探索物理",
+          "独立与协作研究能力"
         ],
         "apply": "申请博后"
       },
       "visitor": {
-        "title": "访问学生",
-        "desc": "我们欢迎访问学生进行短期或长期的研究合作。",
+        "title": "本科生科研实习",
+        "desc": "欢迎在读本科生加入课题组科研实习。",
         "requirements": [
-          "目前就读于学位课程",
-          "研究兴趣与我们的团队一致",
-          "自费或有奖学金支持"
+          "在读物理或 AI 相关专业本科生",
+          "热爱折腾 AI 和探索物理",
+          "对计算物理或 AI for Science 感兴趣"
         ],
         "apply": "联系我们"
       }
     },
-    "benefits": {
-      "title": "我们提供",
-      "items": [
-        {
-          "title": "前沿研究",
-          "desc": "从事AI for Science和功能材料的前沿课题"
-        },
-        {
-          "title": "优质资源",
-          "desc": "使用高性能计算集群和先进软件"
-        },
-        {
-          "title": "协作环境",
-          "desc": "加入具有国际合作的活跃研究社区"
-        },
-        {
-          "title": "职业发展",
-          "desc": "为您的学术和职业成长提供指导和支持"
-        }
-      ]
-    },
     "cta": {
-      "title": "有兴趣加入吗？",
-      "desc": "请将您的简历、研究陈述和代表性论文发送至",
-      "button": "立即联系"
+      "title": "感兴趣？联系我们",
+      "desc": "欢迎随时联系",
+      "button": "发送邮件"
     }
   },
   "contact": {
@@ -187,7 +234,7 @@
       "email": "电子邮箱",
       "position": "职位",
       "location": "地址",
-      "department": "复旦大学物理学系"
+      "department": "复旦大学计算物质科学研究所"
     }
   },
   "footer": {

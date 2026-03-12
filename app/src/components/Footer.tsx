@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { Github, GraduationCap, ExternalLink, Mail, Heart, MapPin } from 'lucide-react';
+import { Github, GraduationCap, ExternalLink, Mail, MapPin } from 'lucide-react';
 
 const socialLinks = [
   { icon: Github, href: 'https://github.com/Hongyu-yu', label: 'GitHub' },
@@ -23,54 +23,47 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-slate-900 text-white dark:bg-slate-950">
-      <div className="max-w-7xl mx-auto section-padding py-16">
-        <div className="grid md:grid-cols-3 gap-12">
-          {/* Brand */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-xl">HY</span>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold">Hongyu Yu</h3>
-                <p className="text-sm text-slate-400">于宏宇</p>
-              </div>
-            </div>
-            <p className="text-slate-400 text-sm leading-relaxed">
+    <footer className="bg-[#f5f5f7] dark:bg-[#161617] text-[#1d1d1f] dark:text-[#f5f5f7] pt-20 pb-10">
+      <div className="max-w-[1000px] mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 pb-16">
+          {/* Brand & Address */}
+          <div className="md:col-span-2 space-y-6">
+            <h3 className="text-[17px] font-semibold tracking-tight">Hongyu Yu (于宏宇)</h3>
+            <p className="text-[14px] text-[#86868b] dark:text-[#a1a1a6] leading-relaxed max-w-sm">
               {t('hero.subtitle')}<br />
               {t('hero.department')}<br />
               {t('hero.university')}
             </p>
-            <div className="flex items-center gap-2 text-slate-400 text-sm">
+            <div className="flex items-center gap-2 text-[14px] text-[#86868b] dark:text-[#a1a1a6]">
               <MapPin className="w-4 h-4" />
-              {t('hero.location')}
+              <span>{t('hero.location')}</span>
             </div>
-            <div className="flex gap-3 pt-2">
+            <div className="flex gap-4">
               {socialLinks.map((link, index) => (
                 <a
                   key={index}
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center hover:bg-blue-600 transition-colors duration-300"
-                  aria-label={link.label}
+                  className="w-8 h-8 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
                 >
-                  <link.icon className="w-5 h-5" />
+                  <link.icon className="w-4 h-4 text-[#424245] dark:text-[#d2d2d7]" />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Directory */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">{t('nav.home')}</h4>
-            <ul className="space-y-2">
+            <h4 className="text-[12px] font-semibold uppercase tracking-wider text-[#424245] dark:text-[#d2d2d7] mb-6">
+              Navigation
+            </h4>
+            <ul className="space-y-4">
               {quickLinks.map((link, index) => (
                 <li key={index}>
                   <Link
                     to={link.href}
-                    className="text-slate-400 hover:text-white transition-colors duration-300"
+                    className="text-[14px] text-[#424245] dark:text-[#d2d2d7] hover:underline underline-offset-4"
                   >
                     {t(link.label)}
                   </Link>
@@ -79,45 +72,36 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact Info */}
+          {/* Contact Details */}
           <div>
-            <h4 className="text-lg font-semibold mb-4">{t('contact.info')}</h4>
-            <div className="space-y-3 text-slate-400">
-              <p className="text-sm">
-                <span className="text-slate-300">{t('contact.labels.email')}:</span>
-                <br />
+            <h4 className="text-[12px] font-semibold uppercase tracking-wider text-[#424245] dark:text-[#d2d2d7] mb-6">
+              Contact
+            </h4>
+            <div className="space-y-6">
+              <div>
+                <p className="text-[12px] text-[#86868b] mb-1">Email</p>
                 <a
                   href="mailto:hongyuyu20@fudan.edu.cn"
-                  className="hover:text-white transition-colors"
+                  className="text-[14px] text-[#424245] dark:text-[#d2d2d7] hover:text-[#0071e3]"
                 >
                   hongyuyu20@fudan.edu.cn
                 </a>
-              </p>
-              <p className="text-sm">
-                <span className="text-slate-300">{t('contact.labels.position')}:</span>
-                <br />
-                {t('hero.subtitle')}
-                <br />
-                {t('hero.department')}
-                <br />
-                {t('hero.university')}
+              </div>
+              <p className="text-[14px] text-[#86868b] leading-tight">
+                {t('hero.location')}
               </p>
             </div>
           </div>
         </div>
 
-        {/* Divider */}
-        <div className="border-t border-slate-800 mt-12 pt-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-slate-400 text-sm text-center md:text-left">
-              &copy; {currentYear} Hongyu Yu. {t('footer.rights')}
-            </p>
-            <p className="text-slate-500 text-sm flex items-center gap-1">
-              {t('footer.madeWith')} <Heart className="w-4 h-4 text-red-500 fill-red-500" />
-            </p>
-          </div>
+        {/* Legal bar */}
+        <div className="border-t border-black/[0.08] dark:border-white/[0.08] pt-8">
+          <p className="text-[12px] text-[#86868b] dark:text-[#a1a1a6]">
+            Copyright © {currentYear} Hongyu Yu. {t('footer.rights')}
+          </p>
         </div>
       </div>
     </footer>
   );
 }
+

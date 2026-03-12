@@ -1,180 +1,93 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ExternalLink, Quote, Calendar, Users, ChevronDown, ChevronUp, Filter } from 'lucide-react';
+import { ExternalLink, Quote } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { scholarStats, publications as scholarPublications } from '@/data/scholarData';
+import type { Publication } from '@/data/scholarData';
 
-interface Publication {
-  title: string;
-  authors: string;
-  journal: string;
-  year: number;
-  citations: number;
-  link?: string;
-  type: 'journal' | 'preprint';
-  highlight?: boolean;
-  category: 'all' | 'ml' | 'ferroelectric' | 'multiferroic';
+const scholarData = scholarStats;
+
+// Classify: sole first author vs co-first author vs other
+function classifyPublications(pubs: Publication[]) {
+  const firstAuthor: Publication[] = [];
+  const coFirstAuthor: Publication[] = [];
+  const other: Publication[] = [];
+
+  for (const pub of pubs) {
+    const authors = pub.authors.toLowerCase();
+    const authorList = authors.split(' and ').map(a => a.trim());
+    const isFirst = authorList.length > 0 &&
+      authorList[0].includes('yu') && (authorList[0].includes('hong') || authorList[0].includes('h '));
+    const isCoFirst = !isFirst && authorList.length > 1 &&
+      authorList[1].includes('yu') && (authorList[1].includes('hong') || authorList[1].includes('h '));
+
+    if (isFirst) {
+      firstAuthor.push(pub);
+    } else if (isCoFirst) {
+      coFirstAuthor.push(pub);
+    } else {
+      other.push(pub);
+    }
+  }
+
+  const sortFn = (a: Publication, b: Publication) =>
+    b.year - a.year || b.citations - a.citations;
+
+  firstAuthor.sort(sortFn);
+  coFirstAuthor.sort(sortFn);
+  other.sort(sortFn);
+
+  return { firstAuthor, coFirstAuthor, other };
 }
 
-// This data will be updated by GitHub Actions
-const publications: Publication[] = [
-  {
-    title: 'Prediction of Room Temperature Ferroelectricity in Subnano Silicon Thin Films with an Antiferroelectric Ground State',
-    authors: 'H. Yu#, S. Deng#, H. Zhu, M. Xie, Y. Zhang, X. Shi, J. Zhong, C. He, H. Xiang',
-    journal: 'Physical Review Letters',
-    year: 2025,
-    citations: 5,
-    link: 'https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.135.156801',
-    type: 'journal',
-    highlight: true,
-    category: 'ferroelectric',
-  },
-  {
-    title: 'Moiré-Induced Magnetoelectricity in Twisted Bilayer NiI₂',
-    authors: 'H. Zhu#, H. Yu#, W. Zhu, G. Yu, C. Xu, H. Xiang',
-    journal: 'Physical Review Letters',
-    year: 2025,
-    citations: 2,
-    link: 'https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.135.196701',
-    type: 'journal',
-    highlight: true,
-    category: 'multiferroic',
-  },
-  {
-    title: 'Recent Advances in Unconventional Ferroelectrics and Multiferroics',
-    authors: 'H. Yu, J. Ji, W. Luo, X. Gong, H. Xiang',
-    journal: 'Advanced Materials',
-    year: 2025,
-    citations: 4,
-    link: 'https://onlinelibrary.wiley.com/doi/10.1002/adma.202507070',
-    type: 'journal',
-    highlight: true,
-    category: 'ferroelectric',
-  },
-  {
-    title: 'Deterministic and Efficient Switching of Sliding Ferroelectrics',
-    authors: 'S. Deng#, H. Yu#, J. Ji, C. Xu, H. Xiang',
-    journal: 'Physical Review B',
-    year: 2025,
-    citations: 12,
-    link: 'https://journals.aps.org/prb/abstract/10.1103/PhysRevB.111.174105',
-    type: 'journal',
-    category: 'ferroelectric',
-  },
-  {
-    title: 'Role of Domain Walls on Imprint and Fatigue in HfO₂-based Ferroelectrics',
-    authors: 'M. Xie#, H. Yu#, B. Zhang, C. Xu, H. Xiang',
-    journal: 'Physical Review B',
-    year: 2025,
-    citations: 3,
-    link: 'https://journals.aps.org/prb/abstract/10.1103/PhysRevB.111.184108',
-    type: 'journal',
-    category: 'ferroelectric',
-  },
-  {
-    title: 'Transferable Machine Learning Approach for Predicting Electronic Structures of Charged Defects',
-    authors: 'Y. Ma, H. Yu, Y. Zhong, S. Chen, X. Gong, H. Xiang',
-    journal: 'Applied Physics Letters',
-    year: 2025,
-    citations: 7,
-    link: 'https://pubs.aip.org/aip/apl/article/126/4/042104/3326750',
-    type: 'journal',
-    category: 'ml',
-  },
-  {
-    title: 'Physics-Informed Time-Reversal Equivariant Neural Network Potential for Magnetic Materials',
-    authors: 'H. Yu#, B. Liu#, Y. Zhong, L. Hong, J. Ji, C. Xu, X. Gong, H. Xiang',
-    journal: 'Physical Review B',
-    year: 2024,
-    citations: 21,
-    link: 'https://journals.aps.org/prb/abstract/10.1103/PhysRevB.110.104427',
-    type: 'journal',
-    category: 'ml',
-  },
-  {
-    title: 'Spin-Dependent Graph Neural Network Potential for Magnetic Materials',
-    authors: 'H. Yu, Y. Zhong, L. Hong, C. Xu, W. Ren, X. Gong, H. Xiang',
-    journal: 'Physical Review B',
-    year: 2024,
-    citations: 54,
-    link: 'https://journals.aps.org/prb/abstract/10.1103/PhysRevB.109.144426',
-    type: 'journal',
-    category: 'ml',
-  },
-  {
-    title: 'Efficient Prediction of Potential Energy Surface and Physical Properties with Kolmogorov-Arnold Networks',
-    authors: 'R. Wang#, H. Yu#, Y. Zhong, H. Xiang',
-    journal: 'arXiv preprint',
-    year: 2024,
-    citations: 7,
-    link: 'https://arxiv.org/abs/2409.03430',
-    type: 'preprint',
-    category: 'ml',
-  },
-  {
-    title: 'Identifying Direct Bandgap Silicon Structures with High-Throughput Search and Machine Learning Methods',
-    authors: 'R. Wang#, H. Yu#, Y. Zhong*, H. Xiang',
-    journal: 'The Journal of Physical Chemistry C',
-    year: 2024,
-    citations: 7,
-    link: 'https://pubs.acs.org/doi/10.1021/acs.jpcc.4c02404',
-    type: 'journal',
-    category: 'ml',
-  },
-  {
-    title: 'A General Tensor Prediction Framework Based on Graph Neural Networks',
-    authors: 'Y. Zhong#, H. Yu#, X. Gong, H. Xiang',
-    journal: 'The Journal of Physical Chemistry Letters',
-    year: 2023,
-    citations: 22,
-    link: 'https://pubs.acs.org/doi/10.1021/acs.jpclett.3c01362',
-    type: 'journal',
-    category: 'ml',
-  },
-  {
-    title: 'Complex Spin Hamiltonian Represented by an Artificial Neural Network',
-    authors: 'H. Yu#, C. Xu#, X. Li, F. Lou, L. Bellaiche, Z. Hu, X. Gong, H. Xiang',
-    journal: 'Physical Review B',
-    year: 2022,
-    citations: 26,
-    link: 'https://journals.aps.org/prb/abstract/10.1103/PhysRevB.105.174422',
-    type: 'journal',
-    category: 'ml',
-  },
-  {
-    title: 'Exploration of the Bright and Dark Exciton Landscape and Fine Structure of MoS₂ using G₀W₀-BSE',
-    authors: 'H. Yu#, M. Laurien#, Z. Hu, O. Rubel',
-    journal: 'Physical Review B',
-    year: 2019,
-    citations: 26,
-    link: 'https://journals.aps.org/prb/abstract/10.1103/PhysRevB.100.125413',
-    type: 'journal',
-    category: 'multiferroic',
-  },
-];
+const { firstAuthor, coFirstAuthor, other } = classifyPublications(scholarPublications);
 
-// Scholar data - will be updated by GitHub Actions
-const scholarData = {
-  citations: 541,
-  hIndex: 12,
-  i10Index: 22,
-  publications: 21,
-  firstAuthor: 13,
-  topJournals: 3,
-};
+function PubCard({ pub, index, t }: { pub: Publication; index: number; t: (k: string) => string }) {
+  return (
+    <div
+      className={`reveal opacity-0 apple-card-flat p-10 group transition-all duration-500 hover:bg-white dark:hover:bg-[#1c1c1e] hover:shadow-xl ${
+        pub.highlight ? 'ring-1 ring-[#0071e3]/20' : ''
+      }`}
+      style={{ animationDelay: `${index * 0.05}s` }}
+    >
+      <div className="flex flex-wrap items-center gap-3 mb-6">
+        {pub.highlight && (
+          <Badge className="bg-[#0071e3] text-white hover:bg-[#0071e3] rounded-full px-4 text-[11px] uppercase tracking-wider font-bold">
+            {t('publications.highlight')}
+          </Badge>
+        )}
+        <span className="text-[14px] font-bold text-[#86868b]">{pub.year}</span>
+        <div className="flex items-center gap-1 text-[13px] text-[#86868b]">
+          <Quote className="w-3.5 h-3.5" /> {pub.citations} {t('publications.citations')}
+        </div>
+      </div>
+
+      <h3 className="text-[22px] font-semibold text-[#1d1d1f] dark:text-white mb-4 leading-tight group-hover:text-[#0071e3] transition-colors">
+        {pub.title}
+      </h3>
+
+      <p className="text-[16px] text-[#86868b] mb-6 leading-relaxed line-clamp-2">{pub.authors}</p>
+
+      <div className="flex items-center justify-between pt-6 border-t border-black/[0.05] dark:border-white/[0.05]">
+        <span className="text-[15px] font-bold text-[#1d1d1f] dark:text-[#f5f5f7]">{pub.journal}</span>
+        {pub.link && (
+          <a
+            href={pub.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center text-[14px] font-bold text-[#0071e3] hover:underline"
+          >
+            {t('publications.view')} <ExternalLink className="ml-1.5 w-4 h-4" />
+          </a>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export default function Publications() {
   const { t } = useTranslation();
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [showAll, setShowAll] = useState(false);
-  const [filter, setFilter] = useState<'all' | 'ml' | 'ferroelectric' | 'multiferroic'>('all');
-
-  const filteredPublications = filter === 'all' 
-    ? publications 
-    : publications.filter(p => p.category === filter);
-  
-  const displayedPublications = showAll ? filteredPublications : filteredPublications.slice(0, 6);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -185,7 +98,7 @@ export default function Publications() {
           }
         });
       },
-      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      { threshold: 0.1 }
     );
 
     const elements = sectionRef.current?.querySelectorAll('.reveal');
@@ -195,185 +108,81 @@ export default function Publications() {
   }, []);
 
   return (
-    <div ref={sectionRef} className="pt-24">
-      {/* Header */}
-      <section className="py-16 bg-gradient-to-br from-slate-50 via-blue-50/30 to-white dark:from-slate-950 dark:via-blue-950/10 dark:to-slate-900">
-        <div className="max-w-7xl mx-auto section-padding">
-          <div className="reveal opacity-0 text-center">
-            <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white mb-4">
-              {t('publications.title')} <span className="text-gradient">{t('publications.highlight')}</span>
-            </h1>
-            <p className="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-              {t('publications.subtitle')}
-            </p>
-          </div>
+    <div ref={sectionRef} className="bg-white dark:bg-black">
+      {/* ── Page Header ── */}
+      <section className="pt-40 pb-20">
+        <div className="max-w-[1000px] mx-auto px-6 text-center space-y-6">
+          <h1 className="text-headline">
+            {t('publications.title')} <span className="text-[#0071e3]">{t('publications.highlight')}</span>
+          </h1>
+          <p className="text-[24px] text-[#86868b] dark:text-[#a1a1a6] leading-relaxed max-w-3xl mx-auto">
+            {t('publications.subtitle')}
+          </p>
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="py-12 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
-        <div className="max-w-7xl mx-auto section-padding">
-          <div className="reveal opacity-0 grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="bg-slate-50 dark:bg-slate-800 rounded-xl p-6 text-center border border-slate-100 dark:border-slate-700">
-              <div className="text-3xl font-bold text-blue-700 dark:text-blue-400">{scholarData.publications}</div>
-              <div className="text-sm text-slate-600 dark:text-slate-400 mt-1">{t('publications.stats.total')}</div>
-            </div>
-            <div className="bg-slate-50 dark:bg-slate-800 rounded-xl p-6 text-center border border-slate-100 dark:border-slate-700">
-              <div className="text-3xl font-bold text-blue-700 dark:text-blue-400">{scholarData.firstAuthor}</div>
-              <div className="text-sm text-slate-600 dark:text-slate-400 mt-1">{t('publications.stats.firstAuthor')}</div>
-            </div>
-            <div className="bg-slate-50 dark:bg-slate-800 rounded-xl p-6 text-center border border-slate-100 dark:border-slate-700">
-              <div className="text-3xl font-bold text-blue-700 dark:text-blue-400">{scholarData.topJournals}</div>
-              <div className="text-sm text-slate-600 dark:text-slate-400 mt-1">{t('publications.stats.topJournals')}</div>
-            </div>
-            <div className="bg-slate-50 dark:bg-slate-800 rounded-xl p-6 text-center border border-slate-100 dark:border-slate-700">
-              <div className="text-3xl font-bold text-blue-700 dark:text-blue-400">{scholarData.citations}</div>
-              <div className="text-sm text-slate-600 dark:text-slate-400 mt-1">{t('publications.stats.citations')}</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Publications List */}
-      <section className="py-20 bg-slate-50 dark:bg-slate-800/50">
-        <div className="max-w-7xl mx-auto section-padding">
-          {/* Filter */}
-          <div className="reveal opacity-0 flex flex-wrap items-center justify-between gap-4 mb-8">
-            <div className="flex items-center gap-2">
-              <Filter className="w-5 h-5 text-slate-500" />
-              <span className="text-sm text-slate-600 dark:text-slate-400">Filter by:</span>
-            </div>
-            <Tabs value={filter} onValueChange={(v) => setFilter(v as any)}>
-              <TabsList className="bg-white dark:bg-slate-800">
-                <TabsTrigger value="all">All</TabsTrigger>
-                <TabsTrigger value="ml">ML Potentials</TabsTrigger>
-                <TabsTrigger value="ferroelectric">Ferroelectric</TabsTrigger>
-                <TabsTrigger value="multiferroic">Multiferroic</TabsTrigger>
-              </TabsList>
-            </Tabs>
-          </div>
-
-          <div className="space-y-4">
-            {displayedPublications.map((pub, index) => (
-              <div
-                key={index}
-                className={`reveal opacity-0 bg-white dark:bg-slate-900 rounded-xl p-6 shadow-sm border transition-all duration-300 hover:shadow-md ${
-                  pub.highlight
-                    ? 'border-blue-300 dark:border-blue-700 hover:border-blue-400 dark:hover:border-blue-600'
-                    : 'border-slate-100 dark:border-slate-700 hover:border-slate-200 dark:hover:border-slate-600'
-                }`}
-                style={{ animationDelay: `${index * 0.05}s` }}
-              >
-                <div className="flex flex-wrap items-start gap-3 mb-3">
-                  {pub.highlight && (
-                    <Badge className="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 hover:bg-blue-100">
-                      {t('publications.highlight')}
-                    </Badge>
-                  )}
-                  {pub.type === 'preprint' && (
-                    <Badge variant="outline" className="text-slate-600 dark:text-slate-400">
-                      {t('publications.preprint')}
-                    </Badge>
-                  )}
-                  <div className="flex items-center gap-1 text-sm text-slate-500 dark:text-slate-400">
-                    <Calendar className="w-4 h-4" />
-                    {pub.year}
-                  </div>
-                  <div className="flex items-center gap-1 text-sm text-slate-500 dark:text-slate-400">
-                    <Quote className="w-4 h-4" />
-                    {pub.citations} citations
-                  </div>
-                </div>
-
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2 leading-snug">
-                  {pub.title}
-                </h3>
-
-                <p className="text-sm text-slate-600 dark:text-slate-400 mb-3">
-                  <Users className="w-4 h-4 inline mr-1" />
-                  {pub.authors}
-                </p>
-
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-medium text-blue-700 dark:text-blue-400">
-                    {pub.journal}
-                  </span>
-                  {pub.link && (
-                    <Button
-                      asChild
-                      variant="ghost"
-                      size="sm"
-                      className="text-slate-500 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-400"
-                    >
-                      <a
-                        href={pub.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <ExternalLink className="w-4 h-4 mr-1" />
-                        {t('publications.view')}
-                      </a>
-                    </Button>
-                  )}
-                </div>
+      {/* ── Visual Stats ── */}
+      <section className="py-20 bg-[#f5f5f7] dark:bg-[#111111]">
+        <div className="max-w-[1100px] mx-auto px-6">
+          <div className="reveal opacity-0 grid grid-cols-2 md:grid-cols-4 gap-12">
+            {[
+              { val: scholarData.publications, lbl: 'publications.stats.total' },
+              { val: scholarData.firstAuthor, lbl: 'publications.stats.firstAuthor' },
+              { val: scholarData.topJournals, lbl: 'publications.stats.topJournals' },
+              { val: scholarData.citations, lbl: 'publications.stats.citations' },
+            ].map((stat, idx) => (
+              <div key={idx} className="text-center space-y-1">
+                <div className="text-[56px] font-semibold tracking-tighter text-[#1d1d1f] dark:text-white">{stat.val}</div>
+                <div className="text-[12px] font-bold uppercase tracking-widest text-[#86868b]">{t(stat.lbl)}</div>
               </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* Show More/Less Button */}
-          {filteredPublications.length > 6 && (
-            <div className="reveal opacity-0 text-center mt-8">
-              <Button
-                onClick={() => setShowAll(!showAll)}
-                variant="outline"
-                className="border-slate-300 dark:border-slate-600 hover:border-blue-600 hover:text-blue-700 dark:hover:text-blue-400"
-              >
-                {showAll ? (
-                  <>
-                    <ChevronUp className="w-4 h-4 mr-2" />
-                    {t('publications.showLess')}
-                  </>
-                ) : (
-                  <>
-                    <ChevronDown className="w-4 h-4 mr-2" />
-                    {t('publications.showAll')}
-                  </>
-                )}
-              </Button>
+      {/* ── Publication Lists ── */}
+      <section className="py-32">
+        <div className="max-w-[1000px] mx-auto px-6 space-y-20">
+
+          {/* First Author */}
+          {firstAuthor.length > 0 && (
+            <div>
+              <div className="reveal opacity-0 mb-12">
+                <h2 className="text-[28px] font-semibold">{t('publications.sectionFirst')}</h2>
+                <p className="text-[15px] text-[#86868b] mt-2">{firstAuthor.length} {t('publications.papers')}</p>
+              </div>
+              <div className="space-y-6">
+                {firstAuthor.map((pub, i) => <PubCard key={`f-${i}`} pub={pub} index={i} t={t} />)}
+              </div>
             </div>
           )}
 
-          {/* View All Links */}
-          <div className="reveal opacity-0 flex flex-wrap justify-center gap-4 mt-8">
-            <Button
-              asChild
-              variant="outline"
-              className="border-blue-600 text-blue-700 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20"
-            >
-              <a
-                href="https://scholar.google.com/citations?user=ES83JO4AAAAJ"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Quote className="w-4 h-4 mr-2" />
-                Google Scholar
-              </a>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              className="border-slate-300 dark:border-slate-600 hover:border-blue-600 hover:text-blue-700 dark:hover:text-blue-400"
-            >
-              <a
-                href="https://www.researchgate.net/profile/Hongyu-Yu-6"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Users className="w-4 h-4 mr-2" />
-                ResearchGate
-              </a>
-            </Button>
-          </div>
+          {/* Co-first Author */}
+          {coFirstAuthor.length > 0 && (
+            <div>
+              <div className="reveal opacity-0 mb-12">
+                <h2 className="text-[28px] font-semibold">{t('publications.sectionCoFirst')}</h2>
+                <p className="text-[15px] text-[#86868b] mt-2">{coFirstAuthor.length} {t('publications.papers')}</p>
+              </div>
+              <div className="space-y-6">
+                {coFirstAuthor.map((pub, i) => <PubCard key={`c-${i}`} pub={pub} index={i} t={t} />)}
+              </div>
+            </div>
+          )}
+
+          {/* Other */}
+          {other.length > 0 && (
+            <div>
+              <div className="reveal opacity-0 mb-12">
+                <h2 className="text-[28px] font-semibold">{t('publications.sectionOther')}</h2>
+                <p className="text-[15px] text-[#86868b] mt-2">{other.length} {t('publications.papers')}</p>
+              </div>
+              <div className="space-y-6">
+                {other.map((pub, i) => <PubCard key={`o-${i}`} pub={pub} index={i} t={t} />)}
+              </div>
+            </div>
+          )}
+
         </div>
       </section>
     </div>
