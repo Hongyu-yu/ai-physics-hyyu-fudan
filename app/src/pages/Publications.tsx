@@ -6,20 +6,20 @@ import type { Publication } from '@/data/scholarData';
 
 const scholarData = scholarStats;
 
-// Classify: sole first author vs other
+// Classify: first/co-first author vs other
 function classifyPublications(pubs: Publication[]) {
-  const firstAuthor: Publication[] = [];
+  const firstOrCoFirst: Publication[] = [];
   const other: Publication[] = [];
 
   for (const pub of pubs) {
     const authors = pub.authors.toLowerCase();
     const authorList = authors.split(' and ').map(a => a.trim());
-    // Only classify as first author if Yu is literally the first listed author
-    const isFirst = authorList.length > 0 &&
-      authorList[0].includes('yu') && (authorList[0].includes('hong') || authorList[0].includes('h '));
+    const matchYu = (s: string) => s.includes('yu') && (s.includes('hong') || s.includes('h '));
+    const isFirst = authorList.length > 0 && matchYu(authorList[0]);
+    const isCoFirst = !isFirst && authorList.length > 1 && matchYu(authorList[1]);
 
-    if (isFirst) {
-      firstAuthor.push(pub);
+    if (isFirst || isCoFirst) {
+      firstOrCoFirst.push(pub);
     } else {
       other.push(pub);
     }
@@ -28,13 +28,13 @@ function classifyPublications(pubs: Publication[]) {
   const sortFn = (a: Publication, b: Publication) =>
     b.year - a.year || b.citations - a.citations;
 
-  firstAuthor.sort(sortFn);
+  firstOrCoFirst.sort(sortFn);
   other.sort(sortFn);
 
-  return { firstAuthor, other };
+  return { firstOrCoFirst, other };
 }
 
-const { firstAuthor, other } = classifyPublications(scholarPublications);
+const { firstOrCoFirst, other } = classifyPublications(scholarPublications);
 
 function PubCard({ pub, index, t }: { pub: Publication; index: number; t: (k: string) => string }) {
   return (
@@ -133,15 +133,15 @@ export default function Publications() {
       <section className="py-32">
         <div className="max-w-[1000px] mx-auto px-6 space-y-20">
 
-          {/* First Author */}
-          {firstAuthor.length > 0 && (
+          {/* First / Co-first Author */}
+          {firstOrCoFirst.length > 0 && (
             <div>
               <div className="reveal opacity-0 mb-12">
                 <h2 className="text-[28px] font-semibold">{t('publications.sectionFirst')}</h2>
-                <p className="text-[15px] text-[#86868b] mt-2">{firstAuthor.length} {t('publications.papers')}</p>
+                <p className="text-[15px] text-[#86868b] mt-2">{firstOrCoFirst.length} {t('publications.papers')}</p>
               </div>
               <div className="space-y-6">
-                {firstAuthor.map((pub, i) => <PubCard key={`f-${i}`} pub={pub} index={i} t={t} />)}
+                {firstOrCoFirst.map((pub, i) => <PubCard key={`f-${i}`} pub={pub} index={i} t={t} />)}
               </div>
             </div>
           )}
