@@ -30,15 +30,15 @@ export default function Home() {
   }, []);
 
   return (
-    <div ref={heroRef} className="overflow-x-hidden">
+    <div ref={heroRef} className="overflow-x-hidden bg-white dark:bg-black">
 
-      {/* ── Massive Hero ── */}
-      <section className="min-h-screen flex items-center bg-white dark:bg-black relative pt-12">
-        <div className="absolute top-0 right-0 w-1/2 h-full hidden lg:block pointer-events-none">
+      {/* ── Hero ── */}
+      <section className="min-h-screen flex items-center relative pt-12">
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <img
-            src="./openclaw-illustration.png"
+            src="./ai-workflow.png"
             alt=""
-            className="w-full h-full object-contain object-right opacity-[0.2] dark:opacity-[0.15] dark:invert scale-110 translate-x-20"
+            className="absolute right-0 top-1/2 -translate-y-1/2 w-2/3 max-w-[800px] h-auto object-contain opacity-[0.07] dark:opacity-[0.05]"
           />
         </div>
 
@@ -81,7 +81,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Featured Stats ── */}
+      {/* ── Stats ── */}
       <section className="bg-[#f5f5f7] dark:bg-[#111111] py-32">
         <div className="max-w-[1000px] mx-auto px-6">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-12">
@@ -104,41 +104,32 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Exploration Bento ── */}
-      <section className="py-32 bg-white dark:bg-black">
+      {/* ── Explore (flowing navigation) ── */}
+      <section className="py-32">
         <div className="max-w-[1100px] mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-6">
-            <Link to="/research" className="reveal opacity-0 stagger-1 group apple-card bg-[#f5f5f7] dark:bg-[#1c1c1e] aspect-square lg:aspect-video flex flex-col justify-end p-12 overflow-hidden relative">
-              <Sparkles className="absolute top-8 right-8 w-10 h-10 text-[#0071e3]/40 transition-transform duration-700 group-hover:scale-125 group-hover:rotate-12" />
-              <div className="z-10">
-                <h2 className="text-[40px] font-semibold text-[#1d1d1f] dark:text-white mb-4">{t('nav.research')}</h2>
-                <p className="text-[19px] text-[#86868b] max-w-sm mb-6">{t('home.researchDesc')}</p>
-                <div className="flex items-center text-[#0071e3] font-semibold">
-                  {t('home.explore')} <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-2 transition-transform" />
+          <div className="space-y-0 divide-y divide-black/[0.06] dark:divide-white/[0.06]">
+            {[
+              { to: '/research', icon: Sparkles, titleKey: 'nav.research', descKey: 'home.researchDesc', ctaKey: 'home.explore' },
+              { to: '/publications', icon: BookOpen, titleKey: 'nav.publications', descKey: 'publications.subtitle', ctaKey: 'home.viewAll' },
+              { to: '/recruitment', icon: Users, titleKey: 'nav.recruitment', descKey: 'home.recruitmentDesc', ctaKey: 'home.learnMore' },
+            ].map((item, idx) => (
+              <Link
+                key={idx}
+                to={item.to}
+                className="reveal opacity-0 group flex items-center gap-8 py-12 first:pt-0 last:pb-0"
+              >
+                <div className="w-14 h-14 rounded-2xl bg-[#0071e3]/10 dark:bg-[#0071e3]/20 flex items-center justify-center flex-shrink-0 group-hover:bg-[#0071e3]/20 transition-colors">
+                  <item.icon className="w-7 h-7 text-[#0071e3]" />
                 </div>
-              </div>
-            </Link>
-
-            <div className="grid gap-6">
-              <Link to="/publications" className="reveal opacity-0 stagger-2 group apple-card bg-[#f5f5f7] dark:bg-[#1c1c1e] p-10 flex flex-col justify-between">
-                <div>
-                  <BookOpen className="w-8 h-8 text-[#0071e3] mb-6" />
-                  <h3 className="text-[28px] font-semibold text-[#1d1d1f] dark:text-white">{t('nav.publications')}</h3>
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-[28px] font-semibold text-[#1d1d1f] dark:text-white group-hover:text-[#0071e3] transition-colors">
+                    {t(item.titleKey)}
+                  </h3>
+                  <p className="text-[17px] text-[#86868b] mt-1">{t(item.descKey)}</p>
                 </div>
-                <div className="flex items-center text-[#0071e3] font-semibold mt-6">
-                  {t('home.viewAll')} <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-2 transition-transform" />
-                </div>
+                <ArrowRight className="w-6 h-6 text-[#d2d2d7] dark:text-[#424245] group-hover:text-[#0071e3] group-hover:translate-x-2 transition-all flex-shrink-0" />
               </Link>
-              <Link to="/recruitment" className="reveal opacity-0 stagger-3 group apple-card bg-[#f5f5f7] dark:bg-[#1c1c1e] p-10 flex flex-col justify-between">
-                <div>
-                  <Users className="w-8 h-8 text-[#0071e3] mb-6" />
-                  <h3 className="text-[28px] font-semibold text-[#1d1d1f] dark:text-white">{t('nav.recruitment')}</h3>
-                </div>
-                <div className="flex items-center text-[#0071e3] font-semibold mt-6">
-                  {t('home.learnMore')} <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-2 transition-transform" />
-                </div>
-              </Link>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -151,15 +142,15 @@ export default function Home() {
             <p className="text-[21px] text-[#86868b]">{t('home.highlightsSubtitle')}</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="space-y-0 divide-y divide-black/[0.06] dark:divide-white/[0.06]">
             {[
               { venue: 'PRL 2025', title: 'Prediction of Room Temperature Ferroelectricity in Subnano Silicon Thin Films' },
               { venue: 'PRL 2025', title: 'Moiré-Induced Magnetoelectricity in Twisted Bilayer NiI₂' },
               { venue: 'AM 2025', title: 'Recent Advances in Unconventional Ferroelectrics and Multiferroics' },
             ].map((item, idx) => (
-              <div key={idx} className="reveal opacity-0 stagger-2 apple-card-flat p-8 space-y-4">
-                <span className="text-[12px] font-bold tracking-widest text-[#0071e3] uppercase">{item.venue}</span>
-                <p className="text-[18px] font-semibold leading-snug">{item.title}</p>
+              <div key={idx} className="reveal opacity-0 flex items-start gap-6 py-8 first:pt-0 last:pb-0">
+                <span className="text-[12px] font-bold tracking-widest text-[#0071e3] uppercase whitespace-nowrap pt-1.5">{item.venue}</span>
+                <p className="text-[20px] font-semibold leading-snug text-[#1d1d1f] dark:text-white">{item.title}</p>
               </div>
             ))}
           </div>
@@ -169,4 +160,3 @@ export default function Home() {
     </div>
   );
 }
-

@@ -7,24 +7,20 @@ import type { Publication } from '@/data/scholarData';
 
 const scholarData = scholarStats;
 
-// Classify: sole first author vs co-first author vs other
+// Classify: sole first author vs other
 function classifyPublications(pubs: Publication[]) {
   const firstAuthor: Publication[] = [];
-  const coFirstAuthor: Publication[] = [];
   const other: Publication[] = [];
 
   for (const pub of pubs) {
     const authors = pub.authors.toLowerCase();
     const authorList = authors.split(' and ').map(a => a.trim());
+    // Only classify as first author if Yu is literally the first listed author
     const isFirst = authorList.length > 0 &&
       authorList[0].includes('yu') && (authorList[0].includes('hong') || authorList[0].includes('h '));
-    const isCoFirst = !isFirst && authorList.length > 1 &&
-      authorList[1].includes('yu') && (authorList[1].includes('hong') || authorList[1].includes('h '));
 
     if (isFirst) {
       firstAuthor.push(pub);
-    } else if (isCoFirst) {
-      coFirstAuthor.push(pub);
     } else {
       other.push(pub);
     }
@@ -34,13 +30,12 @@ function classifyPublications(pubs: Publication[]) {
     b.year - a.year || b.citations - a.citations;
 
   firstAuthor.sort(sortFn);
-  coFirstAuthor.sort(sortFn);
   other.sort(sortFn);
 
-  return { firstAuthor, coFirstAuthor, other };
+  return { firstAuthor, other };
 }
 
-const { firstAuthor, coFirstAuthor, other } = classifyPublications(scholarPublications);
+const { firstAuthor, other } = classifyPublications(scholarPublications);
 
 function PubCard({ pub, index, t }: { pub: Publication; index: number; t: (k: string) => string }) {
   return (
@@ -153,19 +148,6 @@ export default function Publications() {
               </div>
               <div className="space-y-6">
                 {firstAuthor.map((pub, i) => <PubCard key={`f-${i}`} pub={pub} index={i} t={t} />)}
-              </div>
-            </div>
-          )}
-
-          {/* Co-first Author */}
-          {coFirstAuthor.length > 0 && (
-            <div>
-              <div className="reveal opacity-0 mb-12">
-                <h2 className="text-[28px] font-semibold">{t('publications.sectionCoFirst')}</h2>
-                <p className="text-[15px] text-[#86868b] mt-2">{coFirstAuthor.length} {t('publications.papers')}</p>
-              </div>
-              <div className="space-y-6">
-                {coFirstAuthor.map((pub, i) => <PubCard key={`c-${i}`} pub={pub} index={i} t={t} />)}
               </div>
             </div>
           )}

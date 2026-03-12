@@ -42,7 +42,7 @@ export default function Contact() {
 
   return (
     <div ref={sectionRef} className="bg-white dark:bg-black">
-      {/* ── Page Header ── */}
+      {/* ── Header ── */}
       <section className="pt-40 pb-20">
         <div className="max-w-[1000px] mx-auto px-6 text-center space-y-6">
           <h1 className="text-headline">
@@ -54,25 +54,25 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* ── Main Layout ── */}
+      {/* ── Contact Info (flowing list) ── */}
       <section className="py-20 bg-[#f5f5f7] dark:bg-[#111111]">
-        <div className="max-w-[1100px] mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
-            
-            <div className="reveal opacity-0 stagger-1 space-y-8">
-              <h2 className="text-[32px] font-semibold tracking-tight">Direct Channels</h2>
-              <div className="space-y-6">
+        <div className="max-w-[980px] mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-20">
+
+            <div className="reveal opacity-0 space-y-12">
+              <h2 className="text-[32px] font-semibold tracking-tight">{t('contact.info')}</h2>
+              <div className="space-y-0 divide-y divide-black/[0.06] dark:divide-white/[0.06]">
                 {contactInfo.map((item, idx) => (
-                  <div key={idx} className="apple-card p-10 bg-white dark:bg-[#1c1c1e] flex items-center gap-8">
-                    <div className="w-16 h-16 rounded-3xl bg-[#f5f5f7] dark:bg-white/5 flex items-center justify-center flex-shrink-0">
-                      <item.icon className="w-8 h-8 text-[#0071e3]" />
+                  <div key={idx} className="flex items-center gap-6 py-8 first:pt-0 last:pb-0">
+                    <div className="w-12 h-12 rounded-xl bg-[#0071e3]/10 dark:bg-[#0071e3]/20 flex items-center justify-center flex-shrink-0">
+                      <item.icon className="w-6 h-6 text-[#0071e3]" />
                     </div>
                     <div>
                       <p className="text-[12px] uppercase tracking-widest text-[#86868b] font-bold mb-1">{t(item.label)}</p>
                       {item.link ? (
-                        <a href={item.link} className="text-[21px] font-semibold hover:text-[#0071e3] transition-colors">{item.value}</a>
+                        <a href={item.link} className="text-[19px] font-semibold hover:text-[#0071e3] transition-colors">{item.value}</a>
                       ) : (
-                        <p className="text-[21px] font-semibold leading-snug">
+                        <p className="text-[19px] font-semibold leading-snug">
                           {item.value.startsWith('hero.') ? t(item.value) : item.value}
                           {item.subvalue && <span className="block text-[15px] font-normal text-[#86868b] mt-1">{t(item.subvalue)}</span>}
                         </p>
@@ -81,61 +81,68 @@ export default function Contact() {
                   </div>
                 ))}
               </div>
-
-              <div className="apple-card p-12 bg-[#0071e3] text-white space-y-6">
-                <h3 className="text-[28px] font-semibold">{t('contact.collaboration.title')}</h3>
-                <p className="text-[18px] text-white/80 leading-relaxed">{t('contact.collaboration.desc')}</p>
-                <Button asChild className="apple-button h-14 px-8 bg-white text-[#0071e3] hover:bg-white/90">
-                  <a href="mailto:hongyuyu20@fudan.edu.cn">
-                    <Mail className="w-5 h-5 mr-3" />
-                    {t('contact.collaboration.button')}
-                  </a>
-                </Button>
-              </div>
             </div>
 
-            <div className="reveal opacity-0 stagger-2 space-y-8">
-              <h2 className="text-[32px] font-semibold tracking-tight">Digital Presence</h2>
-              <div className="grid gap-4">
+            <div className="reveal opacity-0 stagger-1 space-y-12">
+              <h2 className="text-[32px] font-semibold tracking-tight">{t('contact.online')}</h2>
+              <div className="space-y-0 divide-y divide-black/[0.06] dark:divide-white/[0.06]">
                 {externalLinks.map((link, idx) => (
-                  <a key={idx} href={link.link} target="_blank" rel="noopener noreferrer" 
-                     className="group apple-card p-8 bg-white dark:bg-[#1c1c1e] flex items-center justify-between hover:bg-[#f5f5f7] dark:hover:bg-white/5 transition-all">
-                    <div className="flex items-center gap-6">
-                      <div className="w-14 h-14 rounded-2xl bg-[#f5f5f7] dark:bg-white/5 flex items-center justify-center group-hover:scale-110 transition-transform">
-                        <link.icon className="w-7 h-7 text-[#0071e3]" />
-                      </div>
-                      <div>
-                        <h4 className="text-[21px] font-semibold mb-1">{link.name}</h4>
-                        <p className="text-[14px] text-[#86868b]">View full scientific portfolio</p>
-                      </div>
+                  <a key={idx} href={link.link} target="_blank" rel="noopener noreferrer"
+                     className="group flex items-center gap-6 py-8 first:pt-0 last:pb-0">
+                    <div className="w-12 h-12 rounded-xl bg-[#0071e3]/10 dark:bg-[#0071e3]/20 flex items-center justify-center flex-shrink-0">
+                      <link.icon className="w-6 h-6 text-[#0071e3]" />
                     </div>
-                    <ExternalLink className="w-6 h-6 text-[#d2d2d7] group-hover:text-[#0071e3] transition-colors" />
+                    <span className="text-[19px] font-semibold group-hover:text-[#0071e3] transition-colors flex-1">{link.name}</span>
+                    <ExternalLink className="w-5 h-5 text-[#d2d2d7] group-hover:text-[#0071e3] transition-colors flex-shrink-0" />
                   </a>
                 ))}
-              </div>
-
-              <div className="apple-card p-12 bg-black text-white">
-                <h3 className="text-[24px] font-semibold mb-8">Academic Impact</h3>
-                <div className="grid grid-cols-2 gap-8">
-                  {[
-                    { val: scholarData.citations, lbl: 'hero.stats.citations' },
-                    { val: scholarData.hIndex, lbl: 'hero.stats.hIndex' },
-                    { val: scholarData.publications, lbl: 'hero.stats.publications' },
-                    { val: scholarData.topJournals, lbl: 'PRL/AM Papers' },
-                  ].map((stat, i) => (
-                    <div key={i} className="space-y-1">
-                      <div className="text-[40px] font-semibold tracking-tighter text-[#2997ff]">{stat.val}</div>
-                      <div className="text-[11px] uppercase tracking-widest text-[#86868b] font-bold">{typeof stat.lbl === 'string' && stat.lbl.includes('.') ? t(stat.lbl) : stat.lbl}</div>
-                    </div>
-                  ))}
-                </div>
               </div>
             </div>
 
           </div>
         </div>
       </section>
+
+      {/* ── Academic Impact ── */}
+      <section className="py-20 border-b border-black/[0.05] dark:border-white/[0.05]">
+        <div className="max-w-[980px] mx-auto px-6">
+          <div className="reveal opacity-0 grid grid-cols-2 md:grid-cols-4 gap-12">
+            {[
+              { val: scholarData.citations, lbl: 'hero.stats.citations' },
+              { val: scholarData.hIndex, lbl: 'hero.stats.hIndex' },
+              { val: scholarData.publications, lbl: 'hero.stats.publications' },
+              { val: scholarData.topJournals, lbl: 'publications.stats.topJournals' },
+            ].map((stat, i) => (
+              <div key={i} className="text-center space-y-1">
+                <div className="text-[48px] font-semibold tracking-tighter text-[#1d1d1f] dark:text-white">{stat.val}</div>
+                <div className="text-[12px] uppercase tracking-widest text-[#86868b] font-bold">{t(stat.lbl)}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Collaboration CTA ── */}
+      <section className="py-32 bg-black text-white">
+        <div className="max-w-[680px] mx-auto px-6 text-center space-y-8">
+          <div className="reveal opacity-0 w-16 h-16 rounded-full bg-white/10 mx-auto flex items-center justify-center">
+            <Mail className="w-8 h-8 text-[#2997ff]" />
+          </div>
+          <div className="reveal opacity-0 stagger-1 space-y-4">
+            <h2 className="text-[40px] font-semibold tracking-tight">{t('contact.collaboration.title')}</h2>
+            <p className="text-[19px] text-[#a1a1a6] leading-relaxed">{t('contact.collaboration.desc')}</p>
+          </div>
+          <div className="reveal opacity-0 stagger-2">
+            <p className="text-[24px] font-semibold text-[#2997ff] mb-8">hongyuyu20@fudan.edu.cn</p>
+            <Button asChild className="apple-button bg-[#0071e3] hover:bg-[#0077ed] text-white">
+              <a href="mailto:hongyuyu20@fudan.edu.cn">
+                <Mail className="w-5 h-5 mr-3" />
+                {t('contact.collaboration.button')}
+              </a>
+            </Button>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
-
