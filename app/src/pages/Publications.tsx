@@ -1,50 +1,10 @@
 import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ExternalLink, Quote } from 'lucide-react';
-import { scholarStats, publications as scholarPublications } from '@/data/scholarData';
+import { scholarStats, firstOrCoFirst, otherPubs } from '@/data/scholarData';
 import type { Publication } from '@/data/scholarData';
 
 const scholarData = scholarStats;
-
-// Classify: first/co-first author vs other
-// These second-author papers are NOT co-first
-const notCoFirst = new Set([
-  'transferable machine learning approach for predicting electronic structures of charged defects',
-  'defect-charge-driven 90 {\\deg} switching in hfo2',
-  'universal machine learning kohn–sham hamiltonian for materials',
-  'first-principles approaches to magnetoelectric multiferroics',
-  'transferable equivariant graph neural networks for the hamiltonians of molecules and solids',
-]);
-
-function classifyPublications(pubs: Publication[]) {
-  const firstOrCoFirst: Publication[] = [];
-  const other: Publication[] = [];
-
-  for (const pub of pubs) {
-    const authors = pub.authors.toLowerCase();
-    const authorList = authors.split(' and ').map(a => a.trim());
-    const matchYu = (s: string) => s.includes('yu') && (s.includes('hong') || s.includes('h '));
-    const isFirst = authorList.length > 0 && matchYu(authorList[0]);
-    const isCoFirst = !isFirst && authorList.length > 1 && matchYu(authorList[1])
-      && !notCoFirst.has(pub.title.toLowerCase());
-
-    if (isFirst || isCoFirst) {
-      firstOrCoFirst.push(pub);
-    } else {
-      other.push(pub);
-    }
-  }
-
-  const sortFn = (a: Publication, b: Publication) =>
-    b.year - a.year || b.citations - a.citations;
-
-  firstOrCoFirst.sort(sortFn);
-  other.sort(sortFn);
-
-  return { firstOrCoFirst, other };
-}
-
-const { firstOrCoFirst, other } = classifyPublications(scholarPublications);
 
 function PubCard({ pub, index, t }: { pub: Publication; index: number; t: (k: string) => string }) {
   return (
@@ -157,14 +117,14 @@ export default function Publications() {
           )}
 
           {/* Other */}
-          {other.length > 0 && (
+          {otherPubs.length > 0 && (
             <div>
               <div className="reveal opacity-0 mb-12">
                 <h2 className="text-[28px] font-semibold">{t('publications.sectionOther')}</h2>
-                <p className="text-[15px] text-[#86868b] mt-2">{other.length} {t('publications.papers')}</p>
+                <p className="text-[15px] text-[#86868b] mt-2">{otherPubs.length} {t('publications.papers')}</p>
               </div>
               <div className="space-y-6">
-                {other.map((pub, i) => <PubCard key={`o-${i}`} pub={pub} index={i} t={t} />)}
+                {otherPubs.map((pub, i) => <PubCard key={`o-${i}`} pub={pub} index={i} t={t} />)}
               </div>
             </div>
           )}
