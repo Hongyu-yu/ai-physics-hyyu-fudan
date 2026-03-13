@@ -167,8 +167,8 @@
       }
     },
     "openclaw": {
-      "title": "OpenClaw: Your Physics Playground",
-      "desc": "OpenClaw provides APIs for you to freely explore physics shrimp simulation systems and learn computational physics hands-on",
+      "title": "PhyClaw: Your Physics Playground",
+      "desc": "PhyClaw provides APIs for you to freely explore physics shrimp simulation systems and learn computational physics hands-on",
       "feature1": "Ready-to-use API interface",
       "feature2": "Rich physics simulation scenarios",
       "feature3": "Zero barrier to entry"

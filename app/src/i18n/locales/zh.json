@@ -167,8 +167,8 @@
       }
     },
     "openclaw": {
-      "title": "OpenClaw：你的物理游乐场",
-      "desc": "OpenClaw 提供 API 接口，让你自由探索物理虾模拟系统，在实践中学习计算物理",
+      "title": "PhyClaw：你的物理游乐场",
+      "desc": "PhyClaw 提供 API 接口，让你自由探索物理虾模拟系统，在实践中学习计算物理",
       "feature1": "即开即用的 API 接口",
       "feature2": "丰富的物理模拟场景",
       "feature3": "零门槛上手体验"
