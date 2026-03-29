@@ -1,6 +1,6 @@
 {
   "stats": {
-    "citations": 589,
+    "citations": 595,
     "hIndex": 12,
     "i10Index": 13,
     "publications": 27,
@@ -61,7 +61,7 @@
       "authors": "Wei Luo and Yang Zhong and Hongyu Yu and Muting Xie and Yingwei Chen and Hongjun Xiang and Laurent Bellaiche",
       "journal": "Physical Review B",
       "year": 2025,
-      "citations": 5,
+      "citations": 6,
       "link": "https://journals.aps.org/prb/abstract/10.1103/PhysRevB.111.075407",
       "type": "journal",
       "highlight": false,
@@ -73,7 +73,7 @@
       "authors": "Haiyan Zhu and Hongyu Yu and Weiqin Zhu and Guoliang Yu and Changsong Xu and Hongjun Xiang",
       "journal": "Physical Review Letters",
       "year": 2025,
-      "citations": 4,
+      "citations": 5,
       "link": "https://link.aps.org/doi/10.1103/p6n8-n1rx",
       "type": "journal",
       "highlight": true,
@@ -229,7 +229,7 @@
       "authors": "Yang Zhong and Hongyu Yu and Mao Su and Xingao Gong and Hongjun Xiang",
       "journal": "npj Computational Materials",
       "year": 2023,
-      "citations": 80,
+      "citations": 82,
       "link": "https://www.nature.com/articles/s41524-023-01130-4",
       "type": "journal",
       "highlight": false,
@@ -289,7 +289,7 @@
       "authors": "Hongyu Yu and Liangliang Hong and Shiyou Chen and Xingao Gong and Hongjun Xiang",
       "journal": "arXiv preprint arXiv:2211.16684",
       "year": 2022,
-      "citations": 21,
+      "citations": 22,
       "link": "https://arxiv.org/abs/2211.16684",
       "type": "preprint",
       "highlight": false,
@@ -313,7 +313,7 @@
       "authors": "Xueyang Li and Hongyu Yu and Feng Lou and Junsheng Feng and Myung-Hwan Whangbo and Hongjun Xiang",
       "journal": "",
       "year": 2021,
-      "citations": 81,
+      "citations": 82,
       "link": "https://www.mdpi.com/1420-3049/26/4/803",
       "type": "journal",
       "highlight": false,
@@ -333,5 +333,5 @@
       "isFirstAuthor": true
     }
   ],
-  "lastUpdated": "2026-03-22T01:45:38.905210+00:00"
+  "lastUpdated": "2026-03-29T01:53:31.220356+00:00"
 }
